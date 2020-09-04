@@ -16,6 +16,8 @@
 		47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */; };
 		478EBDCE2502B81200382DED /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; };
 		478EBDCF2502B81200382DED /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		478EBDD12502E14800382DED /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD02502E14800382DED /* Emoji.swift */; };
+		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		47267CAC250298C2007B3E71 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerBuilder.swift; sourceTree = "<group>"; };
 		478EBDCC2502B5ED00382DED /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		478EBDD02502E14800382DED /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 		47267C852502949F007B3E71 /* Upudate */ = {
 			isa = PBXGroup;
 			children = (
+				478EBDD22502E22900382DED /* View */,
 				47267CAE2502992C007B3E71 /* Supporting Files */,
 				47267CAA2502988D007B3E71 /* DTOs */,
 				47267CA82502986E007B3E71 /* Modules */,
@@ -125,6 +130,7 @@
 		47267CAA2502988D007B3E71 /* DTOs */ = {
 			isa = PBXGroup;
 			children = (
+				478EBDD02502E14800382DED /* Emoji.swift */,
 			);
 			path = DTOs;
 			sourceTree = "<group>";
@@ -156,6 +162,22 @@
 				478EBDCC2502B5ED00382DED /* SnapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		478EBDD22502E22900382DED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				478EBDD32502E23100382DED /* MainCollectionViewCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		478EBDD32502E23100382DED /* MainCollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				478EBDD42502E24100382DED /* MainCollectionViewCell.swift */,
+			);
+			path = MainCollectionViewCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,6 +303,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				478EBDD12502E14800382DED /* Emoji.swift in Sources */,
+				478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */,
 				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */,
 				47267C872502949F007B3E71 /* AppDelegate.swift in Sources */,
