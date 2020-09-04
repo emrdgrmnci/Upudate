@@ -12,6 +12,7 @@
 		47267C90250294A5007B3E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47267C8F250294A5007B3E71 /* Assets.xcassets */; };
 		47267C93250294A5007B3E71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47267C91250294A5007B3E71 /* LaunchScreen.storyboard */; };
 		47267C9E250294A5007B3E71 /* UpudateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C9D250294A5007B3E71 /* UpudateTests.swift */; };
+		47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAC250298C2007B3E71 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +35,7 @@
 		47267C99250294A5007B3E71 /* UpudateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UpudateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		47267C9D250294A5007B3E71 /* UpudateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpudateTests.swift; sourceTree = "<group>"; };
 		47267C9F250294A5007B3E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		47267CAC250298C2007B3E71 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,8 @@
 		47267C852502949F007B3E71 /* Upudate */ = {
 			isa = PBXGroup;
 			children = (
+				47267CAA2502988D007B3E71 /* DTOs */,
+				47267CA82502986E007B3E71 /* Modules */,
 				47267C862502949F007B3E71 /* AppDelegate.swift */,
 				47267C882502949F007B3E71 /* SceneDelegate.swift */,
 				47267C8F250294A5007B3E71 /* Assets.xcassets */,
@@ -91,6 +95,29 @@
 				47267C9F250294A5007B3E71 /* Info.plist */,
 			);
 			path = UpudateTests;
+			sourceTree = "<group>";
+		};
+		47267CA82502986E007B3E71 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				47267CAB250298AE007B3E71 /* Main */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		47267CAA2502988D007B3E71 /* DTOs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTOs;
+			sourceTree = "<group>";
+		};
+		47267CAB250298AE007B3E71 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				47267CAC250298C2007B3E71 /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267C872502949F007B3E71 /* AppDelegate.swift in Sources */,
 				47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */,
 			);
