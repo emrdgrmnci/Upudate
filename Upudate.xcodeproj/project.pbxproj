@@ -77,13 +77,9 @@
 		47267C852502949F007B3E71 /* Upudate */ = {
 			isa = PBXGroup;
 			children = (
+				47267CAE2502992C007B3E71 /* Supporting Files */,
 				47267CAA2502988D007B3E71 /* DTOs */,
 				47267CA82502986E007B3E71 /* Modules */,
-				47267C862502949F007B3E71 /* AppDelegate.swift */,
-				47267C882502949F007B3E71 /* SceneDelegate.swift */,
-				47267C8F250294A5007B3E71 /* Assets.xcassets */,
-				47267C91250294A5007B3E71 /* LaunchScreen.storyboard */,
-				47267C94250294A5007B3E71 /* Info.plist */,
 			);
 			path = Upudate;
 			sourceTree = "<group>";
@@ -118,6 +114,18 @@
 				47267CAC250298C2007B3E71 /* MainViewController.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		47267CAE2502992C007B3E71 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				47267C862502949F007B3E71 /* AppDelegate.swift */,
+				47267C882502949F007B3E71 /* SceneDelegate.swift */,
+				47267C8F250294A5007B3E71 /* Assets.xcassets */,
+				47267C91250294A5007B3E71 /* LaunchScreen.storyboard */,
+				47267C94250294A5007B3E71 /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,7 +384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 554X8TL4T7;
-				INFOPLIST_FILE = Upudate/Info.plist;
+				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -394,7 +402,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 554X8TL4T7;
-				INFOPLIST_FILE = Upudate/Info.plist;
+				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
