@@ -22,7 +22,9 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
 
     var imagePicker: UIImagePickerController!
     lazy var givenImage = UIImageView()
-    lazy var emojiImage = UIImageView()
+    lazy var emojiImage1 = UIImageView()
+    lazy var emojiImage2 = UIImageView()
+    lazy var emojiImage3 = UIImageView()
     lazy var saveButton = UIButton()
 
     fileprivate var selectedRow = -1
@@ -33,30 +35,31 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         Data(emoji: #imageLiteral(resourceName: "smile"))
     ]
 
-
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = .red
         givenImageConstraints()
-        emojiImageConstraints()
+        emojiImage1Constraints()
+        emojiImage2Constraints()
+        emojiImage3Constraints()
         saveButtonConstraints()
         collectionViewConstraints()
 
         //        collectionView.delegate = self
         //        collectionView.dataSource = self
 
-//        emojiImage.isUserInteractionEnabled = true
+        //        emojiImage.isUserInteractionEnabled = true
     }
 
     //MARK: - Given Image Constraints
     private func givenImageConstraints() {
         self.view.addSubview(givenImage)
-        givenImage.addSubview(emojiImage)
-        givenImage.backgroundColor = .green
-        givenImage.image = UIImage(named: "happy")
+        givenImage.addSubview(emojiImage1)
+        givenImage.addSubview(emojiImage2)
+        givenImage.addSubview(emojiImage3)
+        givenImage.image = UIImage(named: "example")
         givenImage.snp.makeConstraints { make in
             make.right.equalTo(self.view.snp.right).offset(-30)
             make.left.equalTo(self.view.snp.left).offset(30)
@@ -66,11 +69,28 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
 
-    //MARK: - Emoji Image Constraints
-    private func emojiImageConstraints() {
-        emojiImage.backgroundColor = .green
-        emojiImage.image = UIImage(named: "happy-2")
-        emojiImage.snp.makeConstraints { make in
+    //MARK: - Emoji Image1 Constraints
+    private func emojiImage1Constraints() {
+        emojiImage1.image = UIImage(named: "happy")
+        emojiImage1.snp.makeConstraints { make in
+            make.width.height.equalTo(80)
+        }
+    }
+
+    //MARK: - Emoji Image2 Constraints
+    private func emojiImage2Constraints() {
+        emojiImage2.image = UIImage(named: "happy-2")
+        emojiImage2.snp.makeConstraints { make in
+            make.left.equalTo(90)
+            make.width.height.equalTo(80)
+        }
+    }
+
+    //MARK: - Emoji Image3 Constraints
+    private func emojiImage3Constraints() {
+        emojiImage3.image = UIImage(named: "smile")
+        emojiImage3.snp.makeConstraints { make in
+            make.left.equalTo(200)
             make.width.height.equalTo(80)
         }
     }
@@ -88,6 +108,7 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         }
     }
 
+    //MARK: -  CollectionView Constraints
     private func collectionViewConstraints() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .white
