@@ -12,9 +12,7 @@ import Foundation
 protocol MainViewModelInterface: class {
     var delegate: MainViewModelDelegate? { get set }
     var emojiCount: Int { get }
-    //    func selectCountry(at index: Int)
-//    func country(index: Int) -> Country
-    //    func viewWillDisappear()
+    func emoji(index: Int) -> Emoji
 }
 
 // ViewModel ile işler yapınca View'u notify edeceğiz
