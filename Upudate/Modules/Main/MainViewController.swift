@@ -29,7 +29,10 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate let emojis = [
         Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
         Emoji(image: UIImage(named: "happy")!, name: "happy"),
-        Emoji(image: UIImage(named: "smile")!, name: "smile")
+        Emoji(image: UIImage(named: "smile")!, name: "smile"),
+        Emoji(image: UIImage(named: "angry")!, name: "angry"),
+        Emoji(image: UIImage(named: "cool")!, name: "cool"),
+        Emoji(image: UIImage(named: "pirate")!, name: "pirate")
     ]
 
     // MARK: - View Lifecycle
@@ -38,6 +41,10 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         self.view.backgroundColor = .white
         givenImageConstraints()
         collectionViewConstraints()
+
+        collectionView.reloadData()
+        collectionView.delegate = self
+        collectionView.dataSource = self
 
         //
         //        //Camera
@@ -129,3 +136,31 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     }
 
 }
+
+//MARK: - UICollectionViewDelegate
+extension MainViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let emoji = emojis[indexPath.row]
+        createEmojiView(emoji: emoji)
+    }
+}
+
+//MARK: - UICollectionViewDataSource
+//TODO: - Contractor yapısı kurmaya çalış
+extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 80, height: 80)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return emojis.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
+        cell.data = self.emojis[indexPath.item]
+        return cell
+    }
+}
+
+
