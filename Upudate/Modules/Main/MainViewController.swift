@@ -44,15 +44,11 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
 
-        //
-        //        //Camera
-        //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: BarButtonTitle.camera.rawValue, style: .plain, target: self, action: #selector(takePhoto))
-
-        //PhotoLibrary
+        //Save to PhotoLibrary
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
                                                             target: self,
                                                             action: #selector(savePhoto))
-
+        //Add Photo from camera or library
         navigationItem.leftBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .add,
                             target: self,
