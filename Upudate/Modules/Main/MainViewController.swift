@@ -50,7 +50,9 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         //        //Camera
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: BarButtonTitle.camera.rawValue, style: .plain, target: self, action: #selector(takePhoto))
 
-        //        saveButton.addTarget(self, action: #selector(savePhoto), for: .touchUpInside)
+        //PhotoLibrary
+              navigationItem.rightBarButtonItem =
+                  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePhoto))
     }
 
     //MARK: - AddGestures
@@ -137,6 +139,82 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
 
 }
 
+// MARK: - UIImagePickerControllerDelegate
+extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+    //MARK: - AddFromPhotoLibrary
+    @objc func addFromPhotoLibrary() {
+        selectImageFrom(.photoLibrary)
+    }
+
+    //MARK: - TakePhoto - Camera
+    @objc func takePhoto() {
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
+            let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
+
+            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
+            })
+
+            alertController.addAction(okAction)
+            self.present(alertController, animated: true, completion: nil)
+        } else {
+            selectImageFrom(.camera)
+        }
+    }
+
+    //MARK: - SavePhoto
+    @objc func savePhoto() {
+        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    //MARK: - SaveEmojiAddedImage
+    //Final Image
+    private func saveEmojiAddedImage() -> UIImage {
+        UIGraphicsBeginImageContext(parentView.frame.size)
+        parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage(named: "smile")! }
+        UIGraphicsEndImageContext()
+        return image
+    }
+
+    //MARK: - Image Picker
+    func selectImageFrom(_ source: ImageSource){
+        imagePicker =  UIImagePickerController()
+        imagePicker.delegate = self
+        switch source {
+        case .camera:
+            imagePicker.sourceType = .camera
+        case .photoLibrary:
+            imagePicker.sourceType = .photoLibrary
+        }
+        present(imagePicker, animated: true, completion: nil)
+    }
+
+    //MARK: - DidFinishSavingWithError
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Saved!", message: "Image saved successfully", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
+    }
+
+    //MARK: - DidFinishPickingMediaWithInfo
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
+        imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.originalImage] as? UIImage else {
+            print("Image not found!")
+            return
+        }
+        givenImage.image = selectedImage
+    }
+}
+
+
 //MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -155,7 +233,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
         cell.data = self.emojis[indexPath.item]
