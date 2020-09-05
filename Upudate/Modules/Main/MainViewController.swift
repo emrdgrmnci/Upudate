@@ -9,8 +9,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController, UINavigationControllerDelegate {
-
+class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate let collectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -20,91 +19,87 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
         return cv
     }()
 
-    var imagePicker: UIImagePickerController!
+    private var imagePicker: UIImagePickerController!
     lazy var givenImage = UIImageView()
-    lazy var emojiImage1 = UIImageView()
-    lazy var emojiImage2 = UIImageView()
-    lazy var emojiImage3 = UIImageView()
-    lazy var saveButton = UIButton()
+    private var parentView = UIView()
+    private var initialCenter = CGPoint()
 
     fileprivate var selectedRow = -1
 
-    fileprivate let data = [
-        Data(emoji: #imageLiteral(resourceName: "happy")),
-        Data(emoji: #imageLiteral(resourceName: "happy-2")),
-        Data(emoji: #imageLiteral(resourceName: "smile"))
+    fileprivate let emojis = [
+        Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
+        Emoji(image: UIImage(named: "happy")!, name: "happy"),
+        Emoji(image: UIImage(named: "smile")!, name: "smile")
     ]
 
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .red
+        self.view.backgroundColor = .white
         givenImageConstraints()
-        emojiImage1Constraints()
-        emojiImage2Constraints()
-        emojiImage3Constraints()
-        saveButtonConstraints()
         collectionViewConstraints()
 
-        //        collectionView.delegate = self
-        //        collectionView.dataSource = self
+        //
+        //        //Camera
+        //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: BarButtonTitle.camera.rawValue, style: .plain, target: self, action: #selector(takePhoto))
 
-        //        emojiImage.isUserInteractionEnabled = true
+        //        saveButton.addTarget(self, action: #selector(savePhoto), for: .touchUpInside)
+    }
+
+    //MARK: - AddGestures
+    func addGestures(to stickerView: UIImageView) {
+        let stickerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(stickerDidMove))
+        stickerView.addGestureRecognizer(stickerPanGesture)
+        stickerPanGesture.delegate = self
+    }
+
+    @objc func saveImage() {
+
+    }
+
+    //MARK: - PanGesture
+    @objc func stickerDidMove(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard gestureRecognizer.view != nil else {return}
+        let piece = gestureRecognizer.view!
+        // Get the changes in the X and Y directions relative to
+        // the superview's coordinate space.
+        let translation = gestureRecognizer.translation(in: piece.superview)
+        if gestureRecognizer.state == .began {
+            // Save the view's original position.
+            self.initialCenter = piece.center
+        }
+        // Update the position for the .began, .changed, and .ended states
+        if gestureRecognizer.state != .cancelled {
+            // Add the X and Y translation to the view's original position.
+            let newCenter = CGPoint(x: initialCenter.x + translation.x, y: initialCenter.y + translation.y)
+            if(newCenter.x - 40 > 0 && newCenter.y - 40 > 0 && newCenter.x + 40 < parentView.frame.width && newCenter.y + 40 < parentView.frame.height) {
+                piece.center = newCenter
+            }
+
+        }
+        else {
+            // On cancellation, return the piece to its original location.
+            piece.center = initialCenter
+        }
     }
 
     //MARK: - Given Image Constraints
     private func givenImageConstraints() {
-        self.view.addSubview(givenImage)
-        givenImage.addSubview(emojiImage1)
-        givenImage.addSubview(emojiImage2)
-        givenImage.addSubview(emojiImage3)
+        view.addSubview(parentView)
+        parentView.addSubview(givenImage)
         givenImage.image = UIImage(named: "example")
+        parentView.snp.makeConstraints { make in
+            make.right.equalTo(view.snp.right).offset(-30)
+            make.left.equalTo(view.snp.left).offset(30)
+            make.top.equalTo(view.snp.topMargin).offset(15)
+            make.height.equalTo(450)
+        }
+
         givenImage.snp.makeConstraints { make in
-            make.right.equalTo(self.view.snp.right).offset(-30)
-            make.left.equalTo(self.view.snp.left).offset(30)
-            make.top.equalTo(self.view).offset(80)
-            make.bottom.equalTo(self.view).offset(-180)
-            make.width.height.equalTo(300)
-        }
-    }
-
-    //MARK: - Emoji Image1 Constraints
-    private func emojiImage1Constraints() {
-        emojiImage1.image = UIImage(named: "happy")
-        emojiImage1.snp.makeConstraints { make in
-            make.width.height.equalTo(80)
-        }
-    }
-
-    //MARK: - Emoji Image2 Constraints
-    private func emojiImage2Constraints() {
-        emojiImage2.image = UIImage(named: "happy-2")
-        emojiImage2.snp.makeConstraints { make in
-            make.left.equalTo(90)
-            make.width.height.equalTo(80)
-        }
-    }
-
-    //MARK: - Emoji Image3 Constraints
-    private func emojiImage3Constraints() {
-        emojiImage3.image = UIImage(named: "smile")
-        emojiImage3.snp.makeConstraints { make in
-            make.left.equalTo(200)
-            make.width.height.equalTo(80)
-        }
-    }
-
-    //MARK: -  Save Button Constraints
-    private func saveButtonConstraints() {
-        self.view.addSubview(saveButton)
-        saveButton.backgroundColor = .blue
-        saveButton.setTitle("Save", for: .normal)
-        saveButton.snp.makeConstraints { make in
-            make.right.equalTo(self.view.snp.right).offset(-30)
-            make.left.equalTo(self.view.snp.left).offset(30)
-            make.bottom.equalTo(self.givenImage).offset(80)
-            make.width.height.equalTo(50)
+            make.right.equalTo(parentView.snp.right)
+            make.left.equalTo(parentView.snp.left)
+            make.top.equalTo(parentView.snp.top)
+            make.bottom.equalTo(parentView.snp.bottom)
         }
     }
 
@@ -112,11 +107,25 @@ class MainViewController: UIViewController, UINavigationControllerDelegate {
     private func collectionViewConstraints() {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .white
+        collectionView.layer.cornerRadius = 20
         collectionView.snp.makeConstraints { make in
             make.right.equalTo(self.view.snp.right).offset(-30)
             make.left.equalTo(self.view.snp.left).offset(30)
-            make.bottom.equalTo(self.saveButton).offset(90)
-            make.width.height.equalTo(80)
+            make.top.equalTo(self.givenImage.snp.bottom).offset(15)
+            make.height.equalTo(80)
         }
     }
+
+    private func createEmojiView(emoji: Emoji) {
+        let x = CGFloat.random(in: 0...(parentView.frame.width - 80))
+        let y = CGFloat.random(in: 0...(parentView.frame.height - 80))
+        let imageView = UIImageView(frame: CGRect(x: x, y: y, width: 80, height: 80))
+        imageView.image = emoji.image
+        imageView.isUserInteractionEnabled = true
+        imageView.contentMode = .scaleAspectFit
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(stickerDidMove(_:)))
+        imageView.addGestureRecognizer(gesture)
+        parentView.addSubview(imageView)
+    }
+
 }

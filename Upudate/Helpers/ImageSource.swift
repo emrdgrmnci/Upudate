@@ -9,8 +9,7 @@
 import Foundation
 
 enum BarButtonTitle: String {
-    case photoLibrary = "Photo Library"
-    case camera = "Camera"
+    case save = "Save"
 }
 
 enum ImageSource {

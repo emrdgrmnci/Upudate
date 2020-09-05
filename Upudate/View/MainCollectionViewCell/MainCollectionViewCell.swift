@@ -9,17 +9,17 @@
 import UIKit
 
 class MainCollectionViewCell: UICollectionViewCell {
-    var data: Data? {
+    var data: Emoji? {
         didSet {
             guard let data = data else { return }
-            bg.image = data.emoji
+            bg.image = data.image
         }
     }
 
     fileprivate let bg: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFill
+        iv.contentMode = .scaleAspectFit
         iv.clipsToBounds = true
         iv.layer.cornerRadius = 12
         return iv

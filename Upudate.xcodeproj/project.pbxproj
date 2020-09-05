@@ -19,6 +19,8 @@
 		478EBDD12502E14800382DED /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD02502E14800382DED /* Emoji.swift */; };
 		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
 		479A5977250374CF008104D5 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A5976250374CF008104D5 /* ImageSource.swift */; };
+		479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597A2503B3C8008104D5 /* MainContracts.swift */; };
+		479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597C2503B4D8008104D5 /* MainViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		478EBDD02502E14800382DED /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		479A5976250374CF008104D5 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
+		479A597A2503B3C8008104D5 /* MainContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContracts.swift; sourceTree = "<group>"; };
+		479A597C2503B4D8008104D5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 			children = (
 				47267CAC250298C2007B3E71 /* MainViewController.swift */,
 				47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */,
+				479A597A2503B3C8008104D5 /* MainContracts.swift */,
+				479A597C2503B4D8008104D5 /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -318,9 +324,11 @@
 				478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */,
 				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */,
+				479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */,
 				479A5977250374CF008104D5 /* ImageSource.swift in Sources */,
 				47267C872502949F007B3E71 /* AppDelegate.swift in Sources */,
 				47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */,
+				479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

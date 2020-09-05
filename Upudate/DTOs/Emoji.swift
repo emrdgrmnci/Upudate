@@ -8,6 +8,7 @@
 
 import UIKit
 
-struct Data {
-    var emoji: UIImage
+struct Emoji {
+    var image: UIImage
+    var name: String
 }
