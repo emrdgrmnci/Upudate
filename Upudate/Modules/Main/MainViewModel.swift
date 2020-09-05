@@ -7,20 +7,27 @@
 //
 
 import Foundation
+import UIKit
 
 class MainViewModel {
     weak var delegate: MainViewModelDelegate?
-
-    var emojis: [Emoji]
-
-    init() {
-        self.emojis = []
-    }
+    var emojis = [
+        Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
+        Emoji(image: UIImage(named: "happy")!, name: "happy"),
+        Emoji(image: UIImage(named: "smile")!, name: "smile"),
+        Emoji(image: UIImage(named: "angry")!, name: "angry"),
+        Emoji(image: UIImage(named: "cool")!, name: "cool"),
+        Emoji(image: UIImage(named: "pirate")!, name: "pirate")
+    ]
 }
 
 extension MainViewModel: MainViewModelInterface {
+    func emoji(index: Int) -> Emoji {
+        return emojis[index]
+    }
+
     var emojiCount: Int {
-        return 10
+        return emojis.count
     }
 }
 
