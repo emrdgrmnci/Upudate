@@ -9,17 +9,6 @@
 import UIKit
 import SnapKit
 
-
-enum BarButtonTitle: String {
-    case photoLibrary = "Photo Library"
-    case camera = "Camera"
-}
-
-enum ImageSource {
-    case photoLibrary
-    case camera
-}
-
 class MainViewController: UIViewController, UINavigationControllerDelegate {
 
     fileprivate let collectionView:UICollectionView = {

@@ -18,6 +18,7 @@
 		478EBDCF2502B81200382DED /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		478EBDD12502E14800382DED /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD02502E14800382DED /* Emoji.swift */; };
 		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
+		479A5977250374CF008104D5 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A5976250374CF008104D5 /* ImageSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		478EBDCC2502B5ED00382DED /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		478EBDD02502E14800382DED /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
+		479A5976250374CF008104D5 /* ImageSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		47267C852502949F007B3E71 /* Upudate */ = {
 			isa = PBXGroup;
 			children = (
+				479A597525037496008104D5 /* Helpers */,
 				478EBDD22502E22900382DED /* View */,
 				47267CAE2502992C007B3E71 /* Supporting Files */,
 				47267CAA2502988D007B3E71 /* DTOs */,
@@ -178,6 +181,14 @@
 				478EBDD42502E24100382DED /* MainCollectionViewCell.swift */,
 			);
 			path = MainCollectionViewCell;
+			sourceTree = "<group>";
+		};
+		479A597525037496008104D5 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				479A5976250374CF008104D5 /* ImageSource.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +318,7 @@
 				478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */,
 				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */,
+				479A5977250374CF008104D5 /* ImageSource.swift in Sources */,
 				47267C872502949F007B3E71 /* AppDelegate.swift in Sources */,
 				47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */,
 			);
