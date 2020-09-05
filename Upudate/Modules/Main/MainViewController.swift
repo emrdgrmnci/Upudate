@@ -24,6 +24,14 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     private var parentView = UIView()
     private var initialCenter = CGPoint()
 
+    // ViewModel ve View arası data değişikliğini Observe et
+    var viewModel: MainViewModelInterface! {
+        didSet {
+            //notify metotlarına ulaşıyoruz
+            viewModel.delegate = self
+        }
+    }
+
     fileprivate let emojis = [
         Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
         Emoji(image: UIImage(named: "happy")!, name: "happy"),
@@ -40,7 +48,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         givenImageConstraints()
         collectionViewConstraints()
 
-        collectionView.reloadData()
+//        collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -240,10 +248,18 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
-        
+
         //        cell.emoji = self.emojis[indexPath.item]
         return cell
     }
 }
 
-
+extension MainViewController: MainViewModelDelegate {
+    func notifyCollectionView() {
+        func notifyTableView() {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+}
