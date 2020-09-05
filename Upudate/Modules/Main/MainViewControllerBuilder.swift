@@ -12,6 +12,8 @@ final class MainViewControllerBuilder {
     static func make() -> UINavigationController {
         let mainViewController = MainViewController()
         let nc = UINavigationController(rootViewController: mainViewController)
+        let viewModel = MainViewModel()
+        mainViewController.viewModel = viewModel
         return nc
     }
 }
