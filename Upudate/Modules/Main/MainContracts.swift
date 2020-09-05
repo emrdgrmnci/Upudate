@@ -8,17 +8,18 @@
 
 import Foundation
 
-protocol MainViewModelProtocol {
+// View tarafından ViewModel'a göndermemiz gerekenler
+protocol MainViewModelInterface: class {
     var delegate: MainViewModelDelegate? { get set }
-    func load()
-    func selectEmoji(at index: Int)
+    var emojiCount: Int { get }
+    //    func selectCountry(at index: Int)
+//    func country(index: Int) -> Country
+    //    func viewWillDisappear()
 }
 
-enum MainViewModelOutput: Equatable {
-    case setLoading(Bool)
-//    case showMovieList([MoviePresentation])
-}
-
+// ViewModel ile işler yapınca View'u notify edeceğiz
+// View bizim delegemiz
 protocol MainViewModelDelegate: class {
-    func handleViewModelOutput(_ output: MainViewModelOutput)
+    func notifyCollectionView()//CollectionView reload data
 }
+
