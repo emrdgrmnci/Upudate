@@ -9,8 +9,8 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController, UIGestureRecognizerDelegate {
-    fileprivate let collectionView:UICollectionView = {
+final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+    fileprivate let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -23,8 +23,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     lazy var givenImage = UIImageView()
     private var parentView = UIView()
     private var initialCenter = CGPoint()
-
-    fileprivate var selectedRow = -1
 
     fileprivate let emojis = [
         Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
@@ -86,7 +84,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             if(newCenter.x - 40 > 0 && newCenter.y - 40 > 0 && newCenter.x + 40 < parentView.frame.width && newCenter.y + 40 < parentView.frame.height) {
                 piece.center = newCenter
             }
-
         }
         else {
             // On cancellation, return the piece to its original location.
@@ -127,6 +124,7 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
+    //MARK: - CreateEmojiView
     private func createEmojiView(emoji: Emoji) {
         let x = CGFloat.random(in: 0...(parentView.frame.width - 80))
         let y = CGFloat.random(in: 0...(parentView.frame.height - 80))
@@ -148,21 +146,6 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     @objc func addFromPhotoLibrary() {
         selectImageFrom(.photoLibrary)
     }
-
-    //MARK: - TakePhoto - Camera
-    //    @objc func takePhoto() {
-    //        if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
-    //            let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-    //
-    //            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
-    //            })
-    //
-    //            alertController.addAction(okAction)
-    //            self.present(alertController, animated: true, completion: nil)
-    //        } else {
-    //            selectImageFrom(.camera)
-    //        }
-    //    }
 
     //MARK: - SavePhoto
     @objc func savePhoto() {
@@ -238,6 +221,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let selectedImage = info[.originalImage] as? UIImage else {
             print("Image not found!")
+            //TODO: - Add Alert
             return
         }
         givenImage.image = selectedImage
