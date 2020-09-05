@@ -51,8 +51,14 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         //        navigationItem.rightBarButtonItem = UIBarButtonItem(title: BarButtonTitle.camera.rawValue, style: .plain, target: self, action: #selector(takePhoto))
 
         //PhotoLibrary
-              navigationItem.rightBarButtonItem =
-                  UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(savePhoto))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
+                                                            target: self,
+                                                            action: #selector(savePhoto))
+
+        navigationItem.leftBarButtonItem =
+            UIBarButtonItem(barButtonSystemItem: .add,
+                            target: self,
+                            action: #selector(addPhoto))
     }
 
     //MARK: - AddGestures
@@ -60,10 +66,6 @@ class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         let stickerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(stickerDidMove))
         stickerView.addGestureRecognizer(stickerPanGesture)
         stickerPanGesture.delegate = self
-    }
-
-    @objc func saveImage() {
-
     }
 
     //MARK: - PanGesture
@@ -148,23 +150,52 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     //MARK: - TakePhoto - Camera
-    @objc func takePhoto() {
-        if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
-            let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-
-            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
-            })
-
-            alertController.addAction(okAction)
-            self.present(alertController, animated: true, completion: nil)
-        } else {
-            selectImageFrom(.camera)
-        }
-    }
+    //    @objc func takePhoto() {
+    //        if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
+    //            let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
+    //
+    //            let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
+    //            })
+    //
+    //            alertController.addAction(okAction)
+    //            self.present(alertController, animated: true, completion: nil)
+    //        } else {
+    //            selectImageFrom(.camera)
+    //        }
+    //    }
 
     //MARK: - SavePhoto
     @objc func savePhoto() {
         UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+
+    //MARK: - AddPhoto
+    @objc func addPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
+
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
+            if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
+                let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
+
+                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
+                })
+
+                alertController.addAction(okAction)
+                self.present(alertController, animated: true, completion: nil)
+            } else {
+                self.selectImageFrom(.camera)
+            }
+        }))
+
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action: UIAlertAction) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
     }
 
     //MARK: - SaveEmojiAddedImage
@@ -205,12 +236,16 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
-        imagePicker.dismiss(animated: true, completion: nil)
         guard let selectedImage = info[.originalImage] as? UIImage else {
             print("Image not found!")
             return
         }
         givenImage.image = selectedImage
+        picker.dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
