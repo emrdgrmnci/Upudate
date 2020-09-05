@@ -13,10 +13,10 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     fileprivate let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        return cv
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        return collectionView
     }()
 
     private var imagePicker: UIImagePickerController!
