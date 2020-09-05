@@ -32,15 +32,6 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    fileprivate let emojis = [
-        Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
-        Emoji(image: UIImage(named: "happy")!, name: "happy"),
-        Emoji(image: UIImage(named: "smile")!, name: "smile"),
-        Emoji(image: UIImage(named: "angry")!, name: "angry"),
-        Emoji(image: UIImage(named: "cool")!, name: "cool"),
-        Emoji(image: UIImage(named: "pirate")!, name: "pirate")
-    ]
-
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +39,6 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         givenImageConstraints()
         collectionViewConstraints()
 
-//        collectionView.reloadData()
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -140,12 +130,10 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.addGestureRecognizer(gesture)
         parentView.addSubview(imageView)
     }
-
 }
 
 // MARK: - UIImagePickerControllerDelegate
 extension MainViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
     //MARK: - AddFromPhotoLibrary
     @objc func addFromPhotoLibrary() {
         selectImageFrom(.photoLibrary)
@@ -214,7 +202,6 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let selectedImage = info[.originalImage] as? UIImage else {
             presentAlert(withTitle: "Error!", message: "Image not found!")
-            //TODO: - Add Alert
             return
         }
         givenImage.image = selectedImage
@@ -230,30 +217,30 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 //MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let emoji = emojis[indexPath.row]
+        let emoji = viewModel.emoji(index: indexPath.row)
         createEmojiView(emoji: emoji)
     }
 }
 
 //MARK: - UICollectionViewDataSource
-//TODO: - Contractor yapısı kurmaya çalış
 extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 80)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return emojis.count
+        return viewModel.emojiCount
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
-
-        //        cell.emoji = self.emojis[indexPath.item]
+        let emoji = viewModel.emoji(index: indexPath.item)
+        cell.configure(with: emoji)
         return cell
     }
 }
 
+//MARK: - MainViewModelDelegate
 extension MainViewController: MainViewModelDelegate {
     func notifyCollectionView() {
         func notifyTableView() {
