@@ -157,16 +157,9 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
-
         actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
             if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
-                let alertController = UIAlertController(title: nil, message: "Device has no camera.", preferredStyle: .alert)
-
-                let okAction = UIAlertAction(title: "OK", style: .default, handler: { (alert: UIAlertAction!) in
-                })
-
-                alertController.addAction(okAction)
-                self.present(alertController, animated: true, completion: nil)
+                self.presentAlert(withTitle: "", message: "Device has no camera.")
             } else {
                 self.selectImageFrom(.camera)
             }
@@ -207,20 +200,16 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     //MARK: - DidFinishSavingWithError
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+            presentAlert(withTitle: "Error", message: error.localizedDescription)
         } else {
-            let alert = UIAlertController(title: "Saved!", message: "Image saved successfully", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
+            presentAlert(withTitle:  "Saved!", message: "Image saved successfully")
         }
     }
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let selectedImage = info[.originalImage] as? UIImage else {
-            print("Image not found!")
+            presentAlert(withTitle: "Error!", message: "Image not found!")
             //TODO: - Add Alert
             return
         }
