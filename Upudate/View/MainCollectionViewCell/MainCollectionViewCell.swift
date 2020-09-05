@@ -7,34 +7,38 @@
 //
 
 import UIKit
+import SnapKit
 
 class MainCollectionViewCell: UICollectionViewCell {
-    var data: Emoji? {
-        didSet {
-            guard let data = data else { return }
-            bg.image = data.image
-        }
-    }
+    //    var emoji: Emoji? {
+    //        didSet {
+    //            guard let data = emoji else { return }
+    //            backgroundImage.image = data.image
+    //        }
+    //    }
 
-    fileprivate let bg: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.contentMode = .scaleAspectFit
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 12
-        return iv
+    func configure(with emoji: Emoji) {
+        backgroundImage.image = emoji.image
+    }
+    
+    fileprivate let backgroundImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        return imageView
     }()
 
     override init(frame: CGRect) {
         super.init(frame: .zero)
-
-        contentView.addSubview(bg)
-
-        bg.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        bg.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        bg.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        bg.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-
+        contentView.addSubview(backgroundImage)
+        backgroundImage.snp.makeConstraints { make in
+            make.top.equalTo(contentView.snp.top)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(contentView.snp.right)
+            make.bottom.equalTo(contentView.snp.bottom)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

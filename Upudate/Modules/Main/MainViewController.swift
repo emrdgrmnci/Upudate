@@ -240,7 +240,8 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
-        cell.data = self.emojis[indexPath.item]
+        
+        //        cell.emoji = self.emojis[indexPath.item]
         return cell
     }
 }

@@ -8,14 +8,20 @@
 
 import Foundation
 
-final class MainViewModel: MainViewModelProtocol {
-    var delegate: MainViewModelDelegate?
+class MainViewModel {
+    weak var delegate: MainViewModelDelegate?
 
-    func load() {
-        
-    }
+    var emojis: [Emoji]
 
-    func selectEmoji(at index: Int) {
-        
+    init() {
+        self.emojis = []
     }
 }
+
+extension MainViewModel: MainViewModelInterface {
+    var emojiCount: Int {
+        return 10
+    }
+}
+
+
