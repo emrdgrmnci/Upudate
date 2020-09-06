@@ -38,6 +38,16 @@
                ReferencedContainer = "container:Upudate.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "478C7F9F2504EDEA0074BC26"
+               BuildableName = "UpudateUITests.xctest"
+               BlueprintName = "UpudateUITests"
+               ReferencedContainer = "container:Upudate.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

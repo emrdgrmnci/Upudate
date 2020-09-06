@@ -86,6 +86,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         view.addSubview(parentView)
         parentView.addSubview(givenImage)
         givenImage.image = UIImage(named: "example")
+        givenImage.accessibilityLabel = "Example image"
         parentView.snp.makeConstraints { make in
             make.right.equalTo(view.snp.right).offset(-30)
             make.left.equalTo(view.snp.left).offset(30)
