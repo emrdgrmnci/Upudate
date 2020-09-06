@@ -26,8 +26,6 @@ extension MainViewModelOutputs: Equatable {
         switch (lhs, rhs) {
         case (.showEmojis(let a), .showEmojis(let b)):
             return a == b
-        default:
-            return false
         }
     }
 }
