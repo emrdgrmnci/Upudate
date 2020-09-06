@@ -20,3 +20,14 @@ protocol MainViewModelDelegate: class {
 enum MainViewModelOutputs: Equatable {
     case showEmojis([Emoji])
 }
+
+extension MainViewModelOutputs {
+    static func == (lhs: MainViewModelOutputs, rhs: MainViewModelOutputs) -> Bool {
+        switch (lhs, rhs) {
+        case (.showEmojis(let a), .showEmojis(let b)):
+            return a == b
+        default:
+            return false
+        }
+    }
+}

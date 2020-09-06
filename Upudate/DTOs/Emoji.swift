@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Emoji {
+struct Emoji: Equatable {
     var image: UIImage
     var name: String
 }
