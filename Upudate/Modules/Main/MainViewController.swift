@@ -240,11 +240,10 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
 
 //MARK: - MainViewModelDelegate
 extension MainViewController: MainViewModelDelegate {
-    func notifyCollectionView() {
-        func notifyTableView() {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+    func handleOutputs(_ output: MainViewModelOutputs) {
+        switch output {
+        case .showEmojis(let allEmojis):
+            emojis = allEmojis
         }
     }
 }
