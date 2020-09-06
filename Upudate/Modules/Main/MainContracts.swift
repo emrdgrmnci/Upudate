@@ -17,11 +17,11 @@ protocol MainViewModelDelegate: class {
     func handleOutputs(_ output: MainViewModelOutputs)
 }
 
-enum MainViewModelOutputs: Equatable {
+enum MainViewModelOutputs {
     case showEmojis([Emoji])
 }
 
-extension MainViewModelOutputs {
+extension MainViewModelOutputs: Equatable {
     static func == (lhs: MainViewModelOutputs, rhs: MainViewModelOutputs) -> Bool {
         switch (lhs, rhs) {
         case (.showEmojis(let a), .showEmojis(let b)):

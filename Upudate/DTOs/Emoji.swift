@@ -12,9 +12,3 @@ struct Emoji: Equatable {
     var image: UIImage
     var name: String
 }
-
-extension Emoji {
-    static func fake() -> Emoji {
-        return self.init(image: UIImage(named: "angry")!, name: "angry")
-    }
-}
