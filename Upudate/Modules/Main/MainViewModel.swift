@@ -22,12 +22,8 @@ class MainViewModel {
 }
 
 extension MainViewModel: MainViewModelInterface {
-    func emoji(index: Int) -> Emoji {
-        return emojis[index]
-    }
-
-    var emojiCount: Int {
-        return emojis.count
+    func load() {
+        delegate?.handleOutputs(.showEmojis(emojis))
     }
 }
 
