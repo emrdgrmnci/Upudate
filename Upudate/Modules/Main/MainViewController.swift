@@ -15,7 +15,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.cell.rawValue)
         return collectionView
     }()
 
@@ -144,8 +144,8 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     @objc func addPhoto() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        let actionSheet = UIAlertController(title: "Photo Source", message: "Choose a source", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action: UIAlertAction) in
+        let actionSheet = UIAlertController(title: ImageAlertTitle.photoSourceTitle.rawValue, message: ImageAlertTitle.photoSourceMessage.rawValue, preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.cameraSourceTitle.rawValue, style: .default, handler: {(action: UIAlertAction) in
             if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
                 self.presentAlert(withTitle: "", message: "Device has no camera.")
             } else {
@@ -153,12 +153,12 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
         }))
 
-        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action: UIAlertAction) in
+        actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.actionSheetPhotoLibraryTitle.rawValue, style: .default, handler: {(action: UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }))
 
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.actionSheetCancelTitle.rawValue, style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
     }
 
@@ -188,16 +188,16 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     //MARK: - DidFinishSavingWithError
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            presentAlert(withTitle: "Error", message: error.localizedDescription)
+            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
         } else {
-            presentAlert(withTitle:  "Saved!", message: "Image saved successfully")
+            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
         }
     }
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let selectedImage = info[.originalImage] as? UIImage else {
-            presentAlert(withTitle: "Error!", message: "Image not found!")
+            presentAlert(withTitle: ImageAlertTitle.imagePickingErrorTitle.rawValue, message: ImageAlertTitle.imagePickingErrorMessage.rawValue)
             return
         }
         givenImage.image = selectedImage
@@ -229,7 +229,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! MainCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cell.rawValue, for: indexPath) as! MainCollectionViewCell
         let emoji = viewModel.emoji(index: indexPath.item)
         cell.configure(with: emoji)
         return cell
