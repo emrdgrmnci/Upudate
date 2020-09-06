@@ -9,7 +9,7 @@ Add emoji to your photos. 😀🥰😎🦄
 Screen
 ======================
 <p float="left">
-  <img src="ScreenImages/ss.png" width="1200" height= "600"/>&nbsp; 
+  <img src="ScreenImages/ss.png" width="1200" height= "800"/>&nbsp; 
   </br> 
 </p>
 
