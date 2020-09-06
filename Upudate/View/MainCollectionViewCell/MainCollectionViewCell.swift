@@ -10,13 +10,6 @@ import UIKit
 import SnapKit
 
 class MainCollectionViewCell: UICollectionViewCell {
-    //    var emoji: Emoji? {
-    //        didSet {
-    //            guard let data = emoji else { return }
-    //            backgroundImage.image = data.image
-    //        }
-    //    }
-
     func configure(with emoji: Emoji) {
         backgroundImage.image = emoji.image
     }
