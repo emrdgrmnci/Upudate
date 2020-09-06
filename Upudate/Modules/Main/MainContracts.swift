@@ -17,6 +17,6 @@ protocol MainViewModelDelegate: class {
     func handleOutputs(_ output: MainViewModelOutputs)
 }
 
-enum MainViewModelOutputs {
+enum MainViewModelOutputs: Equatable {
     case showEmojis([Emoji])
 }
