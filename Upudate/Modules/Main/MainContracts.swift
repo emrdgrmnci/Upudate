@@ -8,16 +8,15 @@
 
 import Foundation
 
-// View tarafından ViewModel'a göndermemiz gerekenler
 protocol MainViewModelInterface: class {
     var delegate: MainViewModelDelegate? { get set }
-    var emojiCount: Int { get }
-    func emoji(index: Int) -> Emoji
+    func load()
 }
 
-// ViewModel ile işler yapınca View'u notify edeceğiz
-// View bizim delegemiz
 protocol MainViewModelDelegate: class {
-    func notifyCollectionView()//CollectionView reload data
+    func handleOutputs(_ output: MainViewModelOutputs)
 }
 
+enum MainViewModelOutputs {
+    case showEmojis([Emoji])
+}

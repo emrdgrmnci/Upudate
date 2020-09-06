@@ -24,10 +24,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     private var parentView = UIView()
     private var initialCenter = CGPoint()
 
-    // ViewModel ve View arası data değişikliğini Observe et
     var viewModel: MainViewModelInterface! {
         didSet {
-            //notify metotlarına ulaşıyoruz
             viewModel.delegate = self
         }
     }
