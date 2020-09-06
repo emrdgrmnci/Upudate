@@ -18,34 +18,40 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         collectionView.register(MainCollectionViewCell.self, forCellWithReuseIdentifier: CollectionViewCell.cell.rawValue)
         return collectionView
     }()
-
+    
     private var imagePicker: UIImagePickerController!
     lazy var givenImage = UIImageView()
     private var parentView = UIView()
     private var initialCenter = CGPoint()
-
     private var emojis = [Emoji]()
-
+    
     var viewModel: MainViewModelInterface! {
         didSet {
             viewModel.delegate = self
         }
     }
-
+    
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        
         givenImageConstraints()
         collectionViewConstraints()
-
+        
+        
         collectionView.delegate = self
         collectionView.dataSource = self
-
+        
         //Save to PhotoLibrary
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save,
-                                                            target: self,
-                                                            action: #selector(savePhoto))
+        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
+                                                              target: self,
+                                                              action: #selector(savePhoto)),
+                                              UIBarButtonItem(barButtonSystemItem: .cancel,
+                                                              target: self,
+                                                              action: #selector(cancelEmoji))]
+        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[1].isEnabled = false
         //Add Photo from camera or library
         navigationItem.leftBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .add,
@@ -53,21 +59,21 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
                             action: #selector(addPhoto))
         viewModel.load()
     }
-
+    
     //MARK: - touchesBegan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let emojiView = touches.first?.view {
             parentView.bringSubviewToFront(emojiView)
         }
     }
-
+    
     //MARK: - AddGestures
     func addGestures(to stickerView: UIImageView) {
         let emojiPanGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
         stickerView.addGestureRecognizer(emojiPanGesture)
         emojiPanGesture.delegate = self
     }
-
+    
     //MARK: - PanGesture
     @objc func emojiDidMove(_ gestureRecognizer: UIPanGestureRecognizer) {
         guard let piece = gestureRecognizer.view else { return }
@@ -88,7 +94,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             piece.center = initialCenter
         }
     }
-
+    
     //MARK: - Given Image Constraints
     private func givenImageConstraints() {
         view.addSubview(parentView)
@@ -101,7 +107,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             make.top.equalTo(view.snp.topMargin).offset(15)
             make.height.equalTo(450)
         }
-
+        
         givenImage.snp.makeConstraints { make in
             make.right.equalTo(parentView.snp.right)
             make.left.equalTo(parentView.snp.left)
@@ -109,7 +115,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             make.bottom.equalTo(parentView.snp.bottom)
         }
     }
-
+    
     //MARK: -  CollectionView Constraints
     private func collectionViewConstraints() {
         view.addSubview(collectionView)
@@ -122,7 +128,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             make.height.equalTo(80)
         }
     }
-
+    
     //MARK: - CreateEmojiView
     private func createEmojiView(emoji: Emoji) {
         let x = CGFloat.random(in: 0...(parentView.frame.width - 80))
@@ -134,6 +140,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove(_:)))
         imageView.addGestureRecognizer(gesture)
         parentView.addSubview(imageView)
+        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[1].isEnabled = true
     }
 }
 
@@ -143,12 +151,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     @objc func addFromPhotoLibrary() {
         selectImageFrom(.photoLibrary)
     }
-
-    //MARK: - SavePhoto
-    @objc func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-    }
-
+    
     //MARK: - AddPhoto
     @objc func addPhoto() {
         let imagePickerController = UIImagePickerController()
@@ -161,16 +164,35 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
                 self.selectImageFrom(.camera)
             }
         }))
-
+        
         actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.actionSheetPhotoLibraryTitle.rawValue, style: .default, handler: {(action: UIAlertAction) in
             imagePickerController.sourceType = .photoLibrary
             self.present(imagePickerController, animated: true, completion: nil)
         }))
-
+        
         actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.actionSheetCancelTitle.rawValue, style: .cancel, handler: nil))
         self.present(actionSheet, animated: true, completion: nil)
     }
-
+    
+    //MARK: - CancelEmoji
+    @objc func cancelEmoji() {
+        for view in parentView.subviews {
+            if view == parentView.subviews.last {
+                view.removeFromSuperview()
+            }
+            if parentView.subviews.count == 1 { // parentView.subviews.count == 1 = givenImage
+                guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+                rightBarButtonItems[1].isEnabled = false
+            }
+        }
+    }
+    
+    //MARK: - SavePhoto
+    @objc func savePhoto() {
+        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    
     //MARK: - SaveEmojiAddedImage
     //Final Image
     private func saveEmojiAddedImage() -> UIImage {
@@ -180,7 +202,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         UIGraphicsEndImageContext()
         return image
     }
-
+    
     //MARK: - Image Picker
     func selectImageFrom(_ source: ImageSource){
         imagePicker =  UIImagePickerController()
@@ -193,7 +215,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
         present(imagePicker, animated: true, completion: nil)
     }
-
+    
     //MARK: - DidFinishSavingWithError
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
@@ -202,7 +224,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
             presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
         }
     }
-
+    
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
         guard let selectedImage = info[.originalImage] as? UIImage else {
@@ -212,7 +234,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         givenImage.image = selectedImage
         picker.dismiss(animated: true, completion: nil)
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
@@ -232,11 +254,11 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 80)
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cell.rawValue, for: indexPath) as! MainCollectionViewCell
         let emoji = emojis[indexPath.row]
