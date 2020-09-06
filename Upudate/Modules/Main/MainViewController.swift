@@ -24,6 +24,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
     private var parentView = UIView()
     private var initialCenter = CGPoint()
 
+    private var emojis = [Emoji]()
+
     var viewModel: MainViewModelInterface! {
         didSet {
             viewModel.delegate = self
@@ -49,6 +51,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             UIBarButtonItem(barButtonSystemItem: .add,
                             target: self,
                             action: #selector(addPhoto))
+        viewModel.load()
     }
 
     //MARK: - AddGestures
@@ -212,7 +215,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 //MARK: - UICollectionViewDelegate
 extension MainViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let emoji = viewModel.emoji(index: indexPath.row)
+        let emoji = emojis[indexPath.row]
         createEmojiView(emoji: emoji)
     }
 }
@@ -224,12 +227,12 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.emojiCount
+        return emojis.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cell.rawValue, for: indexPath) as! MainCollectionViewCell
-        let emoji = viewModel.emoji(index: indexPath.item)
+        let emoji = emojis[indexPath.row]
         cell.configure(with: emoji)
         return cell
     }
