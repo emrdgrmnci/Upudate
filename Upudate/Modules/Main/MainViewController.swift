@@ -54,6 +54,13 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         viewModel.load()
     }
 
+    //MARK: - touchesBegan
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let emojiView = touches.first?.view {
+            parentView.bringSubviewToFront(emojiView)
+        }
+    }
+
     //MARK: - AddGestures
     func addGestures(to stickerView: UIImageView) {
         let emojiPanGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
