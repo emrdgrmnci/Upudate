@@ -23,6 +23,7 @@
 		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
 		479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597A2503B3C8008104D5 /* MainContracts.swift */; };
 		479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597C2503B4D8008104D5 /* MainViewModel.swift */; };
+		47DB3C6725052CBE000217D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 47DB3C6625052CBD000217D5 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		479A597A2503B3C8008104D5 /* MainContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContracts.swift; sourceTree = "<group>"; };
 		479A597C2503B4D8008104D5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		47DB3C6625052CBD000217D5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 		47267C7A2502949F007B3E71 = {
 			isa = PBXGroup;
 			children = (
+				47DB3C6625052CBD000217D5 /* README.md */,
 				47267C852502949F007B3E71 /* Upudate */,
 				47267C9C250294A5007B3E71 /* UpudateTests */,
 				478C7FA12504EDEA0074BC26 /* UpudateUITests */,
@@ -351,6 +354,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47DB3C6725052CBE000217D5 /* README.md in Resources */,
 				47267C93250294A5007B3E71 /* LaunchScreen.storyboard in Resources */,
 				47267C90250294A5007B3E71 /* Assets.xcassets in Resources */,
 			);
@@ -579,6 +583,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -601,6 +606,7 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
