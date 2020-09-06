@@ -55,20 +55,16 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
 
     //MARK: - AddGestures
     func addGestures(to stickerView: UIImageView) {
-        let stickerPanGesture = UIPanGestureRecognizer(target: self, action: #selector(stickerDidMove))
-        stickerView.addGestureRecognizer(stickerPanGesture)
-        stickerPanGesture.delegate = self
+        let emojiPanGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
+        stickerView.addGestureRecognizer(emojiPanGesture)
+        emojiPanGesture.delegate = self
     }
 
     //MARK: - PanGesture
-    @objc func stickerDidMove(_ gestureRecognizer: UIPanGestureRecognizer) {
-        guard gestureRecognizer.view != nil else {return}
-        let piece = gestureRecognizer.view!
-        // Get the changes in the X and Y directions relative to
-        // the superview's coordinate space.
+    @objc func emojiDidMove(_ gestureRecognizer: UIPanGestureRecognizer) {
+        guard let piece = gestureRecognizer.view else { return }
         let translation = gestureRecognizer.translation(in: piece.superview)
         if gestureRecognizer.state == .began {
-            // Save the view's original position.
             self.initialCenter = piece.center
         }
         // Update the position for the .began, .changed, and .ended states
@@ -126,7 +122,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.image = emoji.image
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(stickerDidMove(_:)))
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove(_:)))
         imageView.addGestureRecognizer(gesture)
         parentView.addSubview(imageView)
     }
