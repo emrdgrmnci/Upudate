@@ -28,6 +28,7 @@ enum ImageAlertTitle: String {
     case imageSavingSuccessMessage = "Image saved successfully"
     case imagePickingErrorTitle = "Error!"
     case imagePickingErrorMessage = "Image not found!"
+    case deviceHasNoCamera = "Device has no camera."
 }
 
 enum CollectionViewCell: String {

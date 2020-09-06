@@ -147,7 +147,7 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         let actionSheet = UIAlertController(title: ImageAlertTitle.photoSourceTitle.rawValue, message: ImageAlertTitle.photoSourceMessage.rawValue, preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: ImageAlertTitle.cameraSourceTitle.rawValue, style: .default, handler: {(action: UIAlertAction) in
             if !UIImagePickerController.isSourceTypeAvailable(.camera) { //If device has no cam!
-                self.presentAlert(withTitle: "", message: "Device has no camera.")
+                self.presentAlert(withTitle: "", message: ImageAlertTitle.deviceHasNoCamera.rawValue)
             } else {
                 self.selectImageFrom(.camera)
             }
