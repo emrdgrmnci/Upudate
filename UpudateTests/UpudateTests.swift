@@ -13,6 +13,7 @@ class UpudateTests: XCTestCase {
 
     private var viewModel: MainViewModelInterface!
     private var view: MockView!
+    //    private let emojis: [Emoji] = []
 
     override func setUpWithError() throws {
         viewModel = MainViewModel()
@@ -24,12 +25,19 @@ class UpudateTests: XCTestCase {
         viewModel.load()
         //angry, cool, grinning ,happy, pirate, smile
         XCTAssertEqual(view.outputs.count, 1)
+        switch (view.outputs.first) {
+        case .showEmojis(let emojis):
+            XCTAssertEqual(emojis.count, 6)
+        default:
+            break
+        }
     }
 }
 
 private class MockView: MainViewModelDelegate {
     var outputs: [MainViewModelOutputs] = []
     func handleOutputs(_ output: MainViewModelOutputs) {
+        print("output: \(output)")
         outputs.append(output)
     }
 }
