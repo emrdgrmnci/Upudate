@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "47267C822502949F007B3E71"
-               BuildableName = "Upudate.app"
-               BlueprintName = "Upudate"
-               ReferencedContainer = "container:Upudate.xcodeproj">
+               BuildableName = "Zappy.app"
+               BlueprintName = "Zappy"
+               ReferencedContainer = "container:Zappy.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "47267C98250294A5007B3E71"
-               BuildableName = "UpudateTests.xctest"
-               BlueprintName = "UpudateTests"
-               ReferencedContainer = "container:Upudate.xcodeproj">
+               BuildableName = "ZappyTests.xctest"
+               BlueprintName = "ZappyTests"
+               ReferencedContainer = "container:Zappy.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "478C7F9F2504EDEA0074BC26"
-               BuildableName = "UpudateUITests.xctest"
-               BlueprintName = "UpudateUITests"
-               ReferencedContainer = "container:Upudate.xcodeproj">
+               BuildableName = "ZappyUITests.xctest"
+               BlueprintName = "ZappyUITests"
+               ReferencedContainer = "container:Zappy.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "47267C822502949F007B3E71"
-            BuildableName = "Upudate.app"
-            BlueprintName = "Upudate"
-            ReferencedContainer = "container:Upudate.xcodeproj">
+            BuildableName = "Zappy.app"
+            BlueprintName = "Zappy"
+            ReferencedContainer = "container:Zappy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -82,9 +82,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "47267C822502949F007B3E71"
-            BuildableName = "Upudate.app"
-            BlueprintName = "Upudate"
-            ReferencedContainer = "container:Upudate.xcodeproj">
+            BuildableName = "Zappy.app"
+            BlueprintName = "Zappy"
+            ReferencedContainer = "container:Zappy.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

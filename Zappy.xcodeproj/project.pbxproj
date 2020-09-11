@@ -11,12 +11,12 @@
 		47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C882502949F007B3E71 /* SceneDelegate.swift */; };
 		47267C90250294A5007B3E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47267C8F250294A5007B3E71 /* Assets.xcassets */; };
 		47267C93250294A5007B3E71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47267C91250294A5007B3E71 /* LaunchScreen.storyboard */; };
-		47267C9E250294A5007B3E71 /* UpudateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C9D250294A5007B3E71 /* UpudateTests.swift */; };
+		47267C9E250294A5007B3E71 /* ZappyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C9D250294A5007B3E71 /* ZappyTests.swift */; };
 		47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAC250298C2007B3E71 /* MainViewController.swift */; };
 		47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */; };
 		475FC5EF25040EE80068B452 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */; };
 		478C7F9B2504E9EF0074BC26 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478C7F9A2504E9EF0074BC26 /* Constants.swift */; };
-		478C7FA32504EDEA0074BC26 /* UpudateUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478C7FA22504EDEA0074BC26 /* UpudateUITests.swift */; };
+		478C7FA32504EDEA0074BC26 /* ZappyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478C7FA22504EDEA0074BC26 /* ZappyUITests.swift */; };
 		478EBDCE2502B81200382DED /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; };
 		478EBDCF2502B81200382DED /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		478EBDD12502E14800382DED /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD02502E14800382DED /* Emoji.swift */; };
@@ -58,21 +58,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		47267C832502949F007B3E71 /* Upudate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Upudate.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47267C832502949F007B3E71 /* Zappy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zappy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47267C862502949F007B3E71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47267C882502949F007B3E71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47267C8F250294A5007B3E71 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47267C92250294A5007B3E71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		47267C94250294A5007B3E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47267C99250294A5007B3E71 /* UpudateTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UpudateTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		47267C9D250294A5007B3E71 /* UpudateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpudateTests.swift; sourceTree = "<group>"; };
+		47267C99250294A5007B3E71 /* ZappyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZappyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		47267C9D250294A5007B3E71 /* ZappyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappyTests.swift; sourceTree = "<group>"; };
 		47267C9F250294A5007B3E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47267CAC250298C2007B3E71 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerBuilder.swift; sourceTree = "<group>"; };
 		475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		478C7F9A2504E9EF0074BC26 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		478C7FA02504EDEA0074BC26 /* UpudateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UpudateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		478C7FA22504EDEA0074BC26 /* UpudateUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpudateUITests.swift; sourceTree = "<group>"; };
+		478C7FA02504EDEA0074BC26 /* ZappyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZappyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		478C7FA22504EDEA0074BC26 /* ZappyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappyUITests.swift; sourceTree = "<group>"; };
 		478C7FA42504EDEA0074BC26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		478EBDCC2502B5ED00382DED /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		478EBDD02502E14800382DED /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
@@ -112,9 +112,9 @@
 			isa = PBXGroup;
 			children = (
 				47DB3C6625052CBD000217D5 /* README.md */,
-				47267C852502949F007B3E71 /* Upudate */,
-				47267C9C250294A5007B3E71 /* UpudateTests */,
-				478C7FA12504EDEA0074BC26 /* UpudateUITests */,
+				47267C852502949F007B3E71 /* Zappy */,
+				47267C9C250294A5007B3E71 /* ZappyTests */,
+				478C7FA12504EDEA0074BC26 /* ZappyUITests */,
 				47267C842502949F007B3E71 /* Products */,
 				478EBDCB2502B5ED00382DED /* Frameworks */,
 			);
@@ -123,14 +123,14 @@
 		47267C842502949F007B3E71 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47267C832502949F007B3E71 /* Upudate.app */,
-				47267C99250294A5007B3E71 /* UpudateTests.xctest */,
-				478C7FA02504EDEA0074BC26 /* UpudateUITests.xctest */,
+				47267C832502949F007B3E71 /* Zappy.app */,
+				47267C99250294A5007B3E71 /* ZappyTests.xctest */,
+				478C7FA02504EDEA0074BC26 /* ZappyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		47267C852502949F007B3E71 /* Upudate */ = {
+		47267C852502949F007B3E71 /* Zappy */ = {
 			isa = PBXGroup;
 			children = (
 				479A597525037496008104D5 /* Helpers */,
@@ -139,16 +139,16 @@
 				47267CAA2502988D007B3E71 /* DTOs */,
 				47267CA82502986E007B3E71 /* Modules */,
 			);
-			path = Upudate;
+			path = Zappy;
 			sourceTree = "<group>";
 		};
-		47267C9C250294A5007B3E71 /* UpudateTests */ = {
+		47267C9C250294A5007B3E71 /* ZappyTests */ = {
 			isa = PBXGroup;
 			children = (
-				47267C9D250294A5007B3E71 /* UpudateTests.swift */,
+				47267C9D250294A5007B3E71 /* ZappyTests.swift */,
 				47267C9F250294A5007B3E71 /* Info.plist */,
 			);
-			path = UpudateTests;
+			path = ZappyTests;
 			sourceTree = "<group>";
 		};
 		47267CA82502986E007B3E71 /* Modules */ = {
@@ -206,13 +206,13 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		478C7FA12504EDEA0074BC26 /* UpudateUITests */ = {
+		478C7FA12504EDEA0074BC26 /* ZappyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				478C7FA22504EDEA0074BC26 /* UpudateUITests.swift */,
+				478C7FA22504EDEA0074BC26 /* ZappyUITests.swift */,
 				478C7FA42504EDEA0074BC26 /* Info.plist */,
 			);
-			path = UpudateUITests;
+			path = ZappyUITests;
 			sourceTree = "<group>";
 		};
 		478EBDCB2502B5ED00382DED /* Frameworks */ = {
@@ -251,9 +251,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		47267C822502949F007B3E71 /* Upudate */ = {
+		47267C822502949F007B3E71 /* Zappy */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47267CA2250294A5007B3E71 /* Build configuration list for PBXNativeTarget "Upudate" */;
+			buildConfigurationList = 47267CA2250294A5007B3E71 /* Build configuration list for PBXNativeTarget "Zappy" */;
 			buildPhases = (
 				47267C7F2502949F007B3E71 /* Sources */,
 				47267C802502949F007B3E71 /* Frameworks */,
@@ -265,14 +265,14 @@
 			);
 			dependencies = (
 			);
-			name = Upudate;
+			name = Zappy;
 			productName = Upudate;
-			productReference = 47267C832502949F007B3E71 /* Upudate.app */;
+			productReference = 47267C832502949F007B3E71 /* Zappy.app */;
 			productType = "com.apple.product-type.application";
 		};
-		47267C98250294A5007B3E71 /* UpudateTests */ = {
+		47267C98250294A5007B3E71 /* ZappyTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 47267CA5250294A5007B3E71 /* Build configuration list for PBXNativeTarget "UpudateTests" */;
+			buildConfigurationList = 47267CA5250294A5007B3E71 /* Build configuration list for PBXNativeTarget "ZappyTests" */;
 			buildPhases = (
 				47267C95250294A5007B3E71 /* Sources */,
 				47267C96250294A5007B3E71 /* Frameworks */,
@@ -283,14 +283,14 @@
 			dependencies = (
 				47267C9B250294A5007B3E71 /* PBXTargetDependency */,
 			);
-			name = UpudateTests;
+			name = ZappyTests;
 			productName = UpudateTests;
-			productReference = 47267C99250294A5007B3E71 /* UpudateTests.xctest */;
+			productReference = 47267C99250294A5007B3E71 /* ZappyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		478C7F9F2504EDEA0074BC26 /* UpudateUITests */ = {
+		478C7F9F2504EDEA0074BC26 /* ZappyUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 478C7FA72504EDEA0074BC26 /* Build configuration list for PBXNativeTarget "UpudateUITests" */;
+			buildConfigurationList = 478C7FA72504EDEA0074BC26 /* Build configuration list for PBXNativeTarget "ZappyUITests" */;
 			buildPhases = (
 				478C7F9C2504EDEA0074BC26 /* Sources */,
 				478C7F9D2504EDEA0074BC26 /* Frameworks */,
@@ -301,9 +301,9 @@
 			dependencies = (
 				478C7FA62504EDEA0074BC26 /* PBXTargetDependency */,
 			);
-			name = UpudateUITests;
+			name = ZappyUITests;
 			productName = UpudateUITests;
-			productReference = 478C7FA02504EDEA0074BC26 /* UpudateUITests.xctest */;
+			productReference = 478C7FA02504EDEA0074BC26 /* ZappyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -329,7 +329,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 47267C7E2502949F007B3E71 /* Build configuration list for PBXProject "Upudate" */;
+			buildConfigurationList = 47267C7E2502949F007B3E71 /* Build configuration list for PBXProject "Zappy" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -342,9 +342,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				47267C822502949F007B3E71 /* Upudate */,
-				47267C98250294A5007B3E71 /* UpudateTests */,
-				478C7F9F2504EDEA0074BC26 /* UpudateUITests */,
+				47267C822502949F007B3E71 /* Zappy */,
+				47267C98250294A5007B3E71 /* ZappyTests */,
+				478C7F9F2504EDEA0074BC26 /* ZappyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -419,7 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47267C9E250294A5007B3E71 /* UpudateTests.swift in Sources */,
+				47267C9E250294A5007B3E71 /* ZappyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				478C7FA32504EDEA0074BC26 /* UpudateUITests.swift in Sources */,
+				478C7FA32504EDEA0074BC26 /* ZappyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,12 +436,12 @@
 /* Begin PBXTargetDependency section */
 		47267C9B250294A5007B3E71 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 47267C822502949F007B3E71 /* Upudate */;
+			target = 47267C822502949F007B3E71 /* Zappy */;
 			targetProxy = 47267C9A250294A5007B3E71 /* PBXContainerItemProxy */;
 		};
 		478C7FA62504EDEA0074BC26 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 47267C822502949F007B3E71 /* Upudate */;
+			target = 47267C822502949F007B3E71 /* Zappy */;
 			targetProxy = 478C7FA52504EDEA0074BC26 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -582,13 +582,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Zappy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Upudate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zappy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -605,13 +605,13 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "Upudate/Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Zappy/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Upudate;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zappy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -636,7 +636,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Upudate.app/Upudate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zappy.app/Zappy";
 			};
 			name = Debug;
 		};
@@ -658,7 +658,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Upudate.app/Upudate";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Zappy.app/Zappy";
 			};
 			name = Release;
 		};
@@ -703,7 +703,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		47267C7E2502949F007B3E71 /* Build configuration list for PBXProject "Upudate" */ = {
+		47267C7E2502949F007B3E71 /* Build configuration list for PBXProject "Zappy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47267CA0250294A5007B3E71 /* Debug */,
@@ -712,7 +712,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		47267CA2250294A5007B3E71 /* Build configuration list for PBXNativeTarget "Upudate" */ = {
+		47267CA2250294A5007B3E71 /* Build configuration list for PBXNativeTarget "Zappy" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47267CA3250294A5007B3E71 /* Debug */,
@@ -721,7 +721,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		47267CA5250294A5007B3E71 /* Build configuration list for PBXNativeTarget "UpudateTests" */ = {
+		47267CA5250294A5007B3E71 /* Build configuration list for PBXNativeTarget "ZappyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				47267CA6250294A5007B3E71 /* Debug */,
@@ -730,7 +730,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		478C7FA72504EDEA0074BC26 /* Build configuration list for PBXNativeTarget "UpudateUITests" */ = {
+		478C7FA72504EDEA0074BC26 /* Build configuration list for PBXNativeTarget "ZappyUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				478C7FA82504EDEA0074BC26 /* Debug */,

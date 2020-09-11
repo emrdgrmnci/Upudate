@@ -7,9 +7,9 @@
 //
 
 import XCTest
-@testable import Upudate
+@testable import Zappy
 
-class UpudateTests: XCTestCase {
+class ZappyTests: XCTestCase {
 
     private var viewModel: MainViewModelInterface!
     private var view: MockView!
