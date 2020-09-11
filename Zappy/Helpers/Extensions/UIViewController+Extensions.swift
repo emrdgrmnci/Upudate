@@ -1,6 +1,6 @@
 //
 //  UIViewController+Extensions.swift
-//  Upudate
+//  Zappy
 //
 //  Created by Emre Değirmenci on 5.09.2020.
 //  Copyright © 2020 Ali Emre Degirmenci. All rights reserved.

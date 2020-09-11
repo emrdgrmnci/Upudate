@@ -1,4 +1,4 @@
-# Upudate Emoji App [![Swift](https://img.shields.io/badge/Swift-5.1-orange.svg)]() [![Platform](https://img.shields.io/badge/platform-iOS13.6-lightgrey.svg)]()
+# Zappy Emoji App [![Swift](https://img.shields.io/badge/Swift-5.1-orange.svg)]() [![Platform](https://img.shields.io/badge/platform-iOS13.6-lightgrey.svg)]()
 
 Purpose of the project
 ======================

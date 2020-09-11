@@ -21,11 +21,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Upudate wants to use your camera!</string>
+	<string>Zappy wants to use your camera!</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Upudate wants to reach your photo library!</string>
+	<string>Zappy wants to reach your photo library!</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Upudate wants to reach your photo library!</string>
+	<string>Zappy wants to reach your photo library!</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
