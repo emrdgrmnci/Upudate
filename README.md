@@ -3,7 +3,7 @@
 Purpose of the project
 ======================
 
-Add emoji to your photos. 😀🥰😎🦄
+Add emoji and graffiti letters to your photos. 😀🥰😎🦄🎨
 
 
 Screen
