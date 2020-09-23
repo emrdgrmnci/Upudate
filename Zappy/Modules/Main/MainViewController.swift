@@ -137,8 +137,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.image = emoji.image
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove(_:)))
-        imageView.addGestureRecognizer(gesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove(_:)))
+        imageView.addGestureRecognizer(panGesture)
         parentView.addSubview(imageView)
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
         rightBarButtonItems[1].isEnabled = true
