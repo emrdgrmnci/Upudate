@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
+final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -57,6 +57,7 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
             UIBarButtonItem(barButtonSystemItem: .add,
                             target: self,
                             action: #selector(addPhoto))
+
         viewModel.load()
     }
 
@@ -67,15 +68,8 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
-    //MARK: - AddGestures
-    func addGestures(to stickerView: UIImageView) {
-        let emojiPanGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
-        stickerView.addGestureRecognizer(emojiPanGesture)
-        emojiPanGesture.delegate = self
-    }
-
     //MARK: - PanGesture
-    @objc func emojiDidMove(_ gestureRecognizer: UIPanGestureRecognizer) {
+    @objc func emojiDidMove(gestureRecognizer: UIPanGestureRecognizer) {
         guard let piece = gestureRecognizer.view else { return }
         let translation = gestureRecognizer.translation(in: piece.superview)
         if gestureRecognizer.state == .began {
@@ -95,6 +89,33 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         }
     }
 
+    //MARK: - PinchGesture
+    @objc func emojiDidPinch(gestureRecognizer: UIPinchGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            let currentScale: CGFloat = gestureRecognizer.view?.layer.value(forKeyPath: "transform.scale.x") as! CGFloat
+            let minScale: CGFloat = 0.1
+            let maxScale: CGFloat = 2.0
+            let zoomSpeed: CGFloat = 0.5
+
+            var deltaScale = gestureRecognizer.scale
+            deltaScale = ((deltaScale - 1) * zoomSpeed) + 1
+            deltaScale = min(deltaScale, maxScale / currentScale)
+            deltaScale = max(deltaScale, minScale / currentScale)
+
+            let zoomTransform = (gestureRecognizer.view?.transform)!.scaledBy(x: deltaScale, y: deltaScale)
+            gestureRecognizer.view?.transform = zoomTransform
+            gestureRecognizer.scale = 1
+        }
+    }
+
+    //MARK: - RotateGesture
+    @objc func emojiDidRotate(gestureRecognizer: UIRotationGestureRecognizer) {
+        if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+            gestureRecognizer.view?.transform = (gestureRecognizer.view?.transform)!.rotated(by: gestureRecognizer.rotation)
+            gestureRecognizer.rotation = 0
+        }
+    }
+
     //MARK: - Given Image Constraints
     private func givenImageConstraints() {
         view.addSubview(parentView)
@@ -102,9 +123,9 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         givenImage.image = UIImage(named: "example")
         givenImage.accessibilityLabel = "Example image"
         parentView.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right).offset(-30)
-            make.left.equalTo(view.snp.left).offset(30)
-            make.top.equalTo(view.snp.topMargin).offset(15)
+            make.right.equalTo(view.snp.right).offset(0)
+            make.left.equalTo(view.snp.left).offset(0)
+            make.top.equalTo(view.snp.topMargin).offset(0)
             make.height.equalTo(450)
         }
 
@@ -137,8 +158,15 @@ final class MainViewController: UIViewController, UIGestureRecognizerDelegate {
         imageView.image = emoji.image
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove(_:)))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(emojiDidPinch))
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(emojiDidRotate))
+        panGesture.delegate = self
+        pinchGesture.delegate = self
+        rotationGesture.delegate = self
         imageView.addGestureRecognizer(panGesture)
+        imageView.addGestureRecognizer(pinchGesture)
+        imageView.addGestureRecognizer(rotationGesture)
         parentView.addSubview(imageView)
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
         rightBarButtonItems[1].isEnabled = true
@@ -274,5 +302,12 @@ extension MainViewController: MainViewModelDelegate {
         case .showEmojis(let allEmojis):
             emojis = allEmojis
         }
+    }
+}
+
+extension MainViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        print("Simultaneous gesture recognizer!")
+        return gestureRecognizer is UIRotationGestureRecognizer || gestureRecognizer is UIPinchGestureRecognizer
     }
 }
