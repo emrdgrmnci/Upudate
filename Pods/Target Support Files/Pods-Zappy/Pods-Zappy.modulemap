@@ -1,0 +1,6 @@
+framework module Pods_Zappy {
+  umbrella header "Pods-Zappy-umbrella.h"
+
+  export *
+  module * { export * }
+}

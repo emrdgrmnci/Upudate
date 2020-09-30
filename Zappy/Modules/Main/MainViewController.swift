@@ -47,9 +47,9 @@ final class MainViewController: UIViewController {
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
                                                               target: self,
                                                               action: #selector(savePhoto)),
-                                              UIBarButtonItem(barButtonSystemItem: .cancel,
+                                              UIBarButtonItem(barButtonSystemItem: .undo,
                                                               target: self,
-                                                              action: #selector(cancelEmoji))]
+                                                              action: #selector(undoEmoji))]
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
         rightBarButtonItems[1].isEnabled = false
         //Add Photo from camera or library
@@ -142,10 +142,10 @@ final class MainViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.backgroundColor = .white
         collectionView.layer.cornerRadius = 20
-        collectionView.snp.makeConstraints { make in
-            make.right.equalTo(self.view.snp.right).offset(-30)
-            make.left.equalTo(self.view.snp.left).offset(30)
-            make.top.equalTo(self.givenImage.snp.bottom).offset(15)
+        collectionView.snp.makeConstraints { [self] make in
+            make.right.equalTo(view.snp.right).offset(-30)
+            make.left.equalTo(view.snp.left).offset(30)
+            make.top.equalTo(givenImage.snp.bottom).offset(15)
             make.height.equalTo(80)
         }
     }
@@ -202,8 +202,8 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.present(actionSheet, animated: true, completion: nil)
     }
 
-    //MARK: - CancelEmoji
-    @objc func cancelEmoji() {
+    //MARK: - UndoEmoji
+    @objc func undoEmoji() {
         for view in parentView.subviews {
             if view == parentView.subviews.last {
                 view.removeFromSuperview()
