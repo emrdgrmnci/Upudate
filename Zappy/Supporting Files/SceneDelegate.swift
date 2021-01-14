@@ -25,7 +25,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         win.makeKeyAndVisible()
         window = win
 
-        Giphy.configure(apiKey: "grdpOrQ3L7ZYZfT2lnNQqZyCF0MsB6e4")
+        Giphy.configure(apiKey: APIKey.shared) //Insert your Giphy API key
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {
