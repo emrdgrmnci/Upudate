@@ -8,6 +8,10 @@
 
 import UIKit
 import SnapKit
+import GiphyUISDK
+import GiphyCoreSDK
+import SDWebImage
+
 
 final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
@@ -25,6 +29,11 @@ final class MainViewController: UIViewController {
     private var initialCenter = CGPoint()
     private var emojis = [Emoji]()
 
+    let giphy = GiphyViewController()
+
+    let imageView = SDAnimatedImageView()
+    let animatedImage = SDAnimatedImage(named: "https://giphy.com/gifs/MastersOfTheUniverse-masters-of-the-universe-ifLmcmLkM1KReN2NEZ")
+
     var viewModel: MainViewModelInterface! {
         didSet {
             viewModel.delegate = self
@@ -36,6 +45,9 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
+
+        imageView.image = animatedImage
+        self.givenImage.addSubview(imageView)
         givenImageConstraints()
         collectionViewConstraints()
 
@@ -53,10 +65,13 @@ final class MainViewController: UIViewController {
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
         rightBarButtonItems[1].isEnabled = false
         //Add Photo from camera or library
-        navigationItem.leftBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .add,
+        navigationItem.leftBarButtonItems =
+            [UIBarButtonItem(barButtonSystemItem: .add,
                             target: self,
-                            action: #selector(addPhoto))
+                            action: #selector(addPhoto)),
+             UIBarButtonItem(barButtonSystemItem: .search,
+                             target: self,
+                             action: #selector(addGiphy))]
 
         viewModel.load()
     }
@@ -202,6 +217,10 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.present(actionSheet, animated: true, completion: nil)
     }
 
+    @objc func addGiphy() {
+        present(giphy, animated: true, completion: nil)
+    }
+
     //MARK: - UndoEmoji
     @objc func undoEmoji() {
         for view in parentView.subviews {
@@ -309,5 +328,15 @@ extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         print("Simultaneous gesture recognizer!")
         return gestureRecognizer is UIRotationGestureRecognizer || gestureRecognizer is UIPinchGestureRecognizer
+    }
+}
+
+extension MainViewController: GiphyDelegate {
+    func didDismiss(controller: GiphyViewController?) {
+
+    }
+
+    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+        givenImage.sd_setImage(with: URL(string: media.url), placeholderImage: UIImage(named: "placeholder.png"))
     }
 }

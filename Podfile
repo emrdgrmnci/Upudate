@@ -7,6 +7,8 @@ target 'Zappy' do
 
   # Pods for Zappy
 pod 'SnapKit', '~> 5.0.0'
+pod 'Giphy'
+pod 'SDWebImage', '~> 5.0'
   target 'ZappyTests' do
     inherit! :search_paths
     # Pods for testing
