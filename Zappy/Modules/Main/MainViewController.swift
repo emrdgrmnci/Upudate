@@ -31,6 +31,7 @@ final class MainViewController: UIViewController {
 
     private let giphy = GiphyViewController()
 
+    
     var viewModel: MainViewModelInterface! {
         didSet {
             viewModel.delegate = self
