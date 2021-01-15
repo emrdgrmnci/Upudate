@@ -29,10 +29,7 @@ final class MainViewController: UIViewController {
     private var initialCenter = CGPoint()
     private var emojis = [Emoji]()
 
-    let giphy = GiphyViewController()
-
-    let imageView = SDAnimatedImageView()
-    let animatedImage = SDAnimatedImage(named: "https://giphy.com/gifs/MastersOfTheUniverse-masters-of-the-universe-ifLmcmLkM1KReN2NEZ")
+    private let giphy = GiphyViewController()
 
     var viewModel: MainViewModelInterface! {
         didSet {
@@ -45,15 +42,14 @@ final class MainViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
 
-
-        imageView.image = animatedImage
-        self.givenImage.addSubview(imageView)
         givenImageConstraints()
         collectionViewConstraints()
 
 
         collectionView.delegate = self
         collectionView.dataSource = self
+
+        giphy.delegate = self
 
         //Save to PhotoLibrary
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
@@ -80,6 +76,8 @@ final class MainViewController: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let emojiView = touches.first?.view {
             parentView.bringSubviewToFront(emojiView)
+        } else  if let gifView = touches.first?.view {
+            parentView.bringSubviewToFront(gifView)
         }
     }
 
@@ -173,6 +171,29 @@ final class MainViewController: UIViewController {
         imageView.image = emoji.image
         imageView.isUserInteractionEnabled = true
         imageView.contentMode = .scaleAspectFit
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(emojiDidPinch))
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(emojiDidRotate))
+        panGesture.delegate = self
+        pinchGesture.delegate = self
+        rotationGesture.delegate = self
+        imageView.addGestureRecognizer(panGesture)
+        imageView.addGestureRecognizer(pinchGesture)
+        imageView.addGestureRecognizer(rotationGesture)
+        parentView.addSubview(imageView)
+        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[1].isEnabled = true
+    }
+
+    private func createGifView(url: String?) {
+        let x = CGFloat.random(in: 0...(parentView.frame.width - 80))//viewları parentView yap sonra
+        let y = CGFloat.random(in: 0...(parentView.frame.height - 80))//viewları parentView yap sonra
+        let imageView = SDAnimatedImageView(frame: CGRect(x: x, y: y, width: 120, height: 120))
+        if let url = url {
+            DispatchQueue.main.async {
+                imageView.sd_setImage(with: URL(string: url), completed: nil)
+            }
+        }
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(emojiDidPinch))
         let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(emojiDidRotate))
@@ -305,7 +326,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cell.rawValue, for: indexPath) as! MainCollectionViewCell
         let emoji = emojis[indexPath.row]
@@ -337,6 +358,7 @@ extension MainViewController: GiphyDelegate {
     }
 
     func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
-        givenImage.sd_setImage(with: URL(string: media.url), placeholderImage: UIImage(named: "placeholder.png"))
+        let url = media.url(rendition: .fixedWidth, fileType: .gif)
+        createGifView(url: url)
     }
 }

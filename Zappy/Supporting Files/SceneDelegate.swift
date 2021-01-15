@@ -10,6 +10,7 @@ import UIKit
 import GiphyUISDK
 import GiphyCoreSDK
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
