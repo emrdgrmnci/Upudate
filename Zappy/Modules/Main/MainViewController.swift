@@ -53,6 +53,13 @@ final class MainViewController: UIViewController {
         giphy.delegate = self
         giphy.mediaTypeConfig = [.gifs, .stickers, .text, .emoji]
 
+        setupNavigation()
+
+        viewModel.load()
+    }
+
+    //MARK: - Setup Navigation
+    func setupNavigation() {
         //Save to PhotoLibrary
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
                                                               target: self,
@@ -70,8 +77,10 @@ final class MainViewController: UIViewController {
              UIBarButtonItem(barButtonSystemItem: .search,
                              target: self,
                              action: #selector(addGiphy))]
-
-        viewModel.load()
+        navigationItem.leftBarButtonItems?[0].tintColor = .systemGreen
+        navigationItem.leftBarButtonItems?[1].tintColor = .systemBlue
+        navigationItem.rightBarButtonItems?[0].tintColor = .systemOrange
+        navigationItem.rightBarButtonItems?[1].tintColor = .systemPink
     }
 
     //MARK: - touchesBegan
