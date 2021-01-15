@@ -41,7 +41,7 @@ final class MainViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGray2
 
         givenImageConstraints()
         collectionViewConstraints()
@@ -60,6 +60,7 @@ final class MainViewController: UIViewController {
 
     //MARK: - Setup Navigation
     func setupNavigation() {
+        self.setNavigationItem(name: "zappyIcon")
         //Save to PhotoLibrary
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
                                                               target: self,
@@ -164,7 +165,7 @@ final class MainViewController: UIViewController {
     //MARK: -  CollectionView Constraints
     private func collectionViewConstraints() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGray2
         collectionView.layer.cornerRadius = 20
         collectionView.snp.makeConstraints { make in
             make.right.equalTo(view.snp.right).offset(-20)

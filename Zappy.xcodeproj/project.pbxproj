@@ -25,6 +25,7 @@
 		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
 		479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597A2503B3C8008104D5 /* MainContracts.swift */; };
 		479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597C2503B4D8008104D5 /* MainViewModel.swift */; };
+		47AE5FB525B1C5D5005E13F8 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */; };
 		47DB3C6725052CBE000217D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 47DB3C6625052CBD000217D5 /* README.md */; };
 		EF2CEEB5123985A06888BE66 /* Pods_ZappyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B78E5C65B17C74FB3B8AF91 /* Pods_ZappyTests.framework */; };
 /* End PBXBuildFile section */
@@ -87,6 +88,7 @@
 		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		479A597A2503B3C8008104D5 /* MainContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContracts.swift; sourceTree = "<group>"; };
 		479A597C2503B4D8008104D5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		47DB3C6625052CBD000217D5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		62B4126DD4DB55BC6DEBA8F3 /* Pods-Zappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zappy.debug.xcconfig"; path = "Target Support Files/Pods-Zappy/Pods-Zappy.debug.xcconfig"; sourceTree = "<group>"; };
 		630B9309733F2DB82B1006D1 /* Pods-ZappyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappyTests.debug.xcconfig"; path = "Target Support Files/Pods-ZappyTests/Pods-ZappyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */,
+				47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 			files = (
 				478EBDD12502E14800382DED /* Emoji.swift in Sources */,
 				478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */,
+				47AE5FB525B1C5D5005E13F8 /* UIViewController+.swift in Sources */,
 				475FC5EF25040EE80068B452 /* UIViewController+Extensions.swift in Sources */,
 				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */,
