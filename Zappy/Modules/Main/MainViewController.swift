@@ -51,6 +51,7 @@ final class MainViewController: UIViewController {
         collectionView.dataSource = self
 
         giphy.delegate = self
+        giphy.mediaTypeConfig = [.gifs, .stickers, .text, .emoji]
 
         //Save to PhotoLibrary
         navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
@@ -157,9 +158,10 @@ final class MainViewController: UIViewController {
         collectionView.backgroundColor = .white
         collectionView.layer.cornerRadius = 20
         collectionView.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right).offset(-30)
-            make.left.equalTo(view.snp.left).offset(30)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.left.equalTo(view.snp.left).offset(20)
             make.top.equalTo(givenImage.snp.bottom).offset(15)
+            make.bottom.equalTo(view.snp.bottom).offset(-15)
             make.height.equalTo(80)
         }
     }
