@@ -31,7 +31,7 @@ final class MainViewController: UIViewController {
 
     private let giphy = GiphyViewController()
 
-    
+
     var viewModel: MainViewModelInterface! {
         didSet {
             viewModel.delegate = self
@@ -190,10 +190,9 @@ final class MainViewController: UIViewController {
         let x = CGFloat.random(in: 0...(parentView.frame.width - 80))//viewları parentView yap sonra
         let y = CGFloat.random(in: 0...(parentView.frame.height - 80))//viewları parentView yap sonra
         let imageView = SDAnimatedImageView(frame: CGRect(x: x, y: y, width: 120, height: 120))
+        imageView.isUserInteractionEnabled = true
         if let url = url {
-            DispatchQueue.main.async {
-                imageView.sd_setImage(with: URL(string: url), completed: nil)
-            }
+            imageView.sd_setImage(with: URL(string: url), completed: nil)
         }
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(emojiDidPinch))
