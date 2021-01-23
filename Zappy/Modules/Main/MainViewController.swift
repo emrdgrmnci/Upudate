@@ -31,6 +31,8 @@ final class MainViewController: UIViewController {
 
     private let giphy = GiphyViewController()
 
+    var media = GPHMedia()
+
 
     var viewModel: MainViewModelInterface! {
         didSet {
@@ -62,7 +64,8 @@ final class MainViewController: UIViewController {
     func setupNavigation() {
         self.setNavigationItem(name: "zappyIcon")
         //Save to PhotoLibrary
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .save,
                                                               target: self,
                                                               action: #selector(savePhoto)),
                                               UIBarButtonItem(barButtonSystemItem: .undo,
@@ -198,9 +201,10 @@ final class MainViewController: UIViewController {
         rightBarButtonItems[1].isEnabled = true
     }
 
+    //MARK: - CreateGifView
     private func createGifView(url: String?) {
-        let x = CGFloat.random(in: 0...(parentView.frame.width - 80))//viewları parentView yap sonra
-        let y = CGFloat.random(in: 0...(parentView.frame.height - 80))//viewları parentView yap sonra
+        let x = CGFloat.random(in: 0...(parentView.frame.width - 80))
+        let y = CGFloat.random(in: 0...(parentView.frame.height - 80))
         let imageView = SDAnimatedImageView(frame: CGRect(x: x, y: y, width: 120, height: 120))
         imageView.isUserInteractionEnabled = true
         if let url = url {
@@ -269,7 +273,8 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     //MARK: - SavePhoto
     @objc func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, nil, nil)
+        // UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 
 
@@ -280,7 +285,12 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage(named: "smile")! }
         UIGraphicsEndImageContext()
+        
+        let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = self.view
+        self.present(activityViewController, animated: true, completion: nil)
         return image
+
     }
 
     //MARK: - Image Picker
@@ -297,13 +307,13 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     //MARK: - DidFinishSavingWithError
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
-        } else {
-            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
-        }
-    }
+//    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+//        if let error = error {
+//            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
+//        } else {
+//            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
+//        }
+//    }
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
