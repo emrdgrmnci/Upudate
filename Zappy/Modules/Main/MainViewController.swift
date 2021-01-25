@@ -11,7 +11,15 @@ import SnapKit
 import GiphyUISDK
 import GiphyCoreSDK
 import SDWebImage
+import Photos
+import ImageIO
 
+struct Gif {
+    let nano : String
+    let original : String
+    let id : String
+    let image : UIImage
+}
 
 final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
@@ -66,18 +74,18 @@ final class MainViewController: UIViewController {
         //Save to PhotoLibrary
         navigationItem.rightBarButtonItems = [
             UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(savePhoto)),
-                                              UIBarButtonItem(barButtonSystemItem: .undo,
-                                                              target: self,
-                                                              action: #selector(undoEmoji))]
+                            target: self,
+                            action: #selector(savePhoto)),
+            UIBarButtonItem(barButtonSystemItem: .undo,
+                            target: self,
+                            action: #selector(undoEmoji))]
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
         rightBarButtonItems[1].isEnabled = false
         //Add Photo from camera or library
         navigationItem.leftBarButtonItems =
             [UIBarButtonItem(barButtonSystemItem: .add,
-                            target: self,
-                            action: #selector(addPhoto)),
+                             target: self,
+                             action: #selector(addPhoto)),
              UIBarButtonItem(barButtonSystemItem: .search,
                              target: self,
                              action: #selector(addGiphy))]
@@ -154,7 +162,7 @@ final class MainViewController: UIViewController {
             make.right.equalTo(view.snp.right).offset(0)
             make.left.equalTo(view.snp.left).offset(0)
             make.top.equalTo(view.snp.topMargin).offset(0)
-            make.height.equalTo(450)
+            make.height.equalTo(480)
         }
 
         givenImage.snp.makeConstraints { make in
@@ -284,6 +292,26 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         UIGraphicsBeginImageContext(parentView.frame.size)
         parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage(named: "smile")! }
+
+        let imageView = SDAnimatedImageView()
+        let animatedImage = SDAnimatedImage(named: "image.gif")
+        imageView.image = animatedImage
+
+        imageView.image = image
+
+        let imageData = imageView.image?.sd_imageData(as: .HEIC)
+        if let data = imageData {
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
+        }) { success, error in
+            guard success else {
+                print("failed to save gif \(error?.localizedDescription)")
+                return
+            }
+            print("successfully saved gif")
+        }
+        }
+
         UIGraphicsEndImageContext()
         
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
@@ -307,13 +335,13 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     //MARK: - DidFinishSavingWithError
-//    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-//        if let error = error {
-//            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
-//        } else {
-//            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
-//        }
-//    }
+    //    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+    //        if let error = error {
+    //            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
+    //        } else {
+    //            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
+    //        }
+    //    }
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
