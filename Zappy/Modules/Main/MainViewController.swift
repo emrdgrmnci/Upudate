@@ -14,13 +14,6 @@ import SDWebImage
 import Photos
 import ImageIO
 
-struct Gif {
-    let nano : String
-    let original : String
-    let id : String
-    let image : UIImage
-}
-
 final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -36,11 +29,7 @@ final class MainViewController: UIViewController {
     private var parentView = UIView()
     private var initialCenter = CGPoint()
     private var emojis = [Emoji]()
-
     private let giphy = GiphyViewController()
-
-    var media = GPHMedia()
-
 
     var viewModel: MainViewModelInterface! {
         didSet {
