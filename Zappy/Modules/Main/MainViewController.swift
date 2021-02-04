@@ -13,6 +13,7 @@ import GiphyCoreSDK
 import SDWebImage
 import Photos
 import ImageIO
+import AVFoundation
 
 final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
@@ -30,6 +31,12 @@ final class MainViewController: UIViewController {
     private var initialCenter = CGPoint()
     private var emojis = [Emoji]()
     private let giphy = GiphyViewController()
+
+    private var gifImages: [UIImage] = []
+    private var gifTimer: Timer?
+    private var isSaveVideo = true
+    private var videoFileURL = URL(string: "")
+    private var fileUrlString = ""
 
     var viewModel: MainViewModelInterface! {
         didSet {
@@ -270,44 +277,73 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     //MARK: - SavePhoto
     @objc func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, nil, nil)
-        // UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        //        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+//        UISaveVideoAtPathToSavedPhotosAlbum("\(String(describing: videoFileURL))", self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
 
 
     //MARK: - SaveEmojiAddedImage
     //Final Image
     private func saveEmojiAddedImage() -> UIImage {
-        UIGraphicsBeginImageContext(parentView.frame.size)
-        parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        UIGraphicsBeginImageContextWithOptions(parentView.frame.size, true, 0.0)
+        parentView.drawHierarchy(in: parentView.bounds, afterScreenUpdates: true)
+//        parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage(named: "smile")! }
-
-        let imageView = SDAnimatedImageView()
-        let animatedImage = SDAnimatedImage(named: "image.gif")
-        imageView.image = animatedImage
-
-        imageView.image = image
-
-        let imageData = imageView.image?.sd_imageData(as: .HEIC)
-        if let data = imageData {
-        PHPhotoLibrary.shared().performChanges({
-            PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
-        }) { success, error in
-            guard success else {
-                print("failed to save gif \(error?.localizedDescription)")
-                return
-            }
-            print("successfully saved gif")
-        }
-        }
-
         UIGraphicsEndImageContext()
-        
+        self.gifImages.append(image)
+        print("gifImage: \(gifImages)")
+        print("gifImagesCount: \(gifImages.count)")
+        if gifImages.count == 50 {
+            self.stopTimer()
+        }
+
+
         let activityViewController:UIActivityViewController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
         return image
 
+    }
+
+    func stopTimer() {
+        if gifTimer != nil {
+            gifTimer!.invalidate()
+            gifTimer = nil
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.createVideo()
+                }
+            }
+        }
+    }
+
+    func createVideo()  {
+        let settings = CXEImagesToVideo.videoSettings(codec: AVVideoCodecType.h264.rawValue, width: (gifImages[0].cgImage?.width)!, height: (gifImages[0].cgImage?.height)!)
+        let movieMaker = CXEImagesToVideo(videoSettings: settings)
+        movieMaker.createMovieFrom(images: gifImages){ (fileURL:URL) in
+            if self.isSaveVideo {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+                }) { saved, error in
+                    //                  self.loadingViewStop()
+                    self.gifImages.removeAll()
+                    if saved {
+                        self.gifImages.removeAll()
+//                        DispatchQueue.main.async {
+                            print("Video saved successfully")
+                            //                        self.view.toastMessage("Video saved successfully".localized)
+//                        }
+                    } else {
+                        print(error)
+                    }
+                }
+            } else {
+                self.gifImages.removeAll()
+                self.videoFileURL = fileURL
+                //               self.nextTapped(snap: nil)
+            }
+        }
     }
 
     //MARK: - Image Picker
@@ -324,13 +360,13 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     //MARK: - DidFinishSavingWithError
-    //    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-    //        if let error = error {
-    //            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
-    //        } else {
-    //            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
-    //        }
-    //    }
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
+        } else {
+            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
+        }
+    }
 
     //MARK: - DidFinishPickingMediaWithInfo
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]){
