@@ -9,7 +9,7 @@ Add emoji and graffiti letters to your photos. 😀🥰😎🦄🎨
 Screen
 ======================
 <p float="left">
-  <img src="zappy.gif" width="400" height= "600"/>&nbsp; 
+  <img src="zappy.gif" width="400" height= "500"/>&nbsp; 
   </br> 
 </p>
 
