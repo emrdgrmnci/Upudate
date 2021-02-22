@@ -16,7 +16,7 @@ Screen
 ## Tech-stack :calling:
 
 
-* [MVVM](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm)
+//* [MVVM](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm)
 
 * [Swift 5](https://github.com/apple/swift)
 
