@@ -16,6 +16,7 @@ Screen
 ## Tech-stack :calling:
 
 <!-- * [MVVM](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm) -->
+* [Giphy](https://github.com/Giphy/giphy-ios-sdk/blob/master/Docs.md)
 
 * [Swift 5](https://github.com/apple/swift)
 
