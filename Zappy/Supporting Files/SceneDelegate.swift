@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import GiphyUISDK
+import GiphyCoreSDK
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
@@ -22,6 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         win.rootViewController = MainViewControllerBuilder.make()
         win.makeKeyAndVisible()
         window = win
+
+        Giphy.configure(apiKey: apiKey) //Insert your Giphy API key
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

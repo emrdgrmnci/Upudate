@@ -8,6 +8,11 @@
 
 import UIKit
 import SnapKit
+import GiphyUISDK
+import GiphyCoreSDK
+import SDWebImage
+import Photos
+
 
 final class MainViewController: UIViewController {
     fileprivate let collectionView: UICollectionView = {
@@ -24,6 +29,16 @@ final class MainViewController: UIViewController {
     private var parentView = UIView()
     private var initialCenter = CGPoint()
     private var emojis = [Emoji]()
+    private let giphy = GiphyViewController()
+    private let circularProgressBar = CircularProgressBar()
+
+    private var gifImages: [UIImage] = []
+    private var gifTimer: Timer?
+    private var isSaveVideo = true
+    private var isGIFAdded = false
+    private var videoFileURL = URL(string: "")
+
+    var indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
 
     var viewModel: MainViewModelInterface! {
         didSet {
@@ -34,7 +49,7 @@ final class MainViewController: UIViewController {
     // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemGray2
 
         givenImageConstraints()
         collectionViewConstraints()
@@ -43,28 +58,65 @@ final class MainViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
 
-        //Save to PhotoLibrary
-        navigationItem.rightBarButtonItems = [UIBarButtonItem(barButtonSystemItem: .save,
-                                                              target: self,
-                                                              action: #selector(savePhoto)),
-                                              UIBarButtonItem(barButtonSystemItem: .undo,
-                                                              target: self,
-                                                              action: #selector(undoEmoji))]
-        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
-        rightBarButtonItems[1].isEnabled = false
-        //Add Photo from camera or library
-        navigationItem.leftBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .add,
-                            target: self,
-                            action: #selector(addPhoto))
+        giphy.delegate = self
+        giphy.mediaTypeConfig = [.gifs, .stickers, .text, .emoji]
+
+        setupNavigation()
 
         viewModel.load()
+
+        setupIndicator()
     }
 
+    //MARK: - Setup Navigation
+    private func setupNavigation() {
+        self.setNavigationItem(name: "zappyIcon")
+        //Save to PhotoLibrary
+        navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .save,
+                            target: self,
+                            action: #selector(fireTimer)),
+            UIBarButtonItem(barButtonSystemItem: .undo,
+                            target: self,
+                            action: #selector(undoEmoji))]
+        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[0].isEnabled = false
+        rightBarButtonItems[1].isEnabled = false
+        //Add Photo from camera or library
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add,
+                             target: self,
+                             action: #selector(addPhoto)),
+            setupGIFBarButton()
+        ]
+        navigationItem.leftBarButtonItems?[0].tintColor = .systemGreen
+        navigationItem.rightBarButtonItems?[0].tintColor = .systemOrange
+        navigationItem.rightBarButtonItems?[1].tintColor = .systemPink
+    }
+
+    private func setupIndicator() {
+        indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        indicator.center = view.center
+        indicator.color = .orange
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+    }
+
+    private func setupGIFBarButton() -> UIBarButtonItem {
+        let button = UIButton(type: UIButton.ButtonType.custom)
+        button.setImage(UIImage(named: "gifIcon"), for: .normal)
+        button.addTarget(self, action: #selector(addGiphy), for: .touchUpInside)
+        button.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let barButton = UIBarButtonItem(customView: button)
+        self.navigationItem.leftBarButtonItems = [barButton]
+        return barButton
+    }
     //MARK: - touchesBegan
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let emojiView = touches.first?.view {
             parentView.bringSubviewToFront(emojiView)
+        } else  if let gifView = touches.first?.view {
+            parentView.bringSubviewToFront(gifView)
         }
     }
 
@@ -126,7 +178,7 @@ final class MainViewController: UIViewController {
             make.right.equalTo(view.snp.right).offset(0)
             make.left.equalTo(view.snp.left).offset(0)
             make.top.equalTo(view.snp.topMargin).offset(0)
-            make.height.equalTo(450)
+            make.height.equalTo(480)
         }
 
         givenImage.snp.makeConstraints { make in
@@ -140,12 +192,13 @@ final class MainViewController: UIViewController {
     //MARK: -  CollectionView Constraints
     private func collectionViewConstraints() {
         view.addSubview(collectionView)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .systemGray2
         collectionView.layer.cornerRadius = 20
         collectionView.snp.makeConstraints { make in
-            make.right.equalTo(view.snp.right).offset(-30)
-            make.left.equalTo(view.snp.left).offset(30)
+            make.right.equalTo(view.snp.right).offset(-20)
+            make.left.equalTo(view.snp.left).offset(20)
             make.top.equalTo(givenImage.snp.bottom).offset(15)
+            make.bottom.equalTo(view.snp.bottom).offset(-15)
             make.height.equalTo(80)
         }
     }
@@ -169,6 +222,30 @@ final class MainViewController: UIViewController {
         imageView.addGestureRecognizer(rotationGesture)
         parentView.addSubview(imageView)
         guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[1].isEnabled = true
+    }
+
+    //MARK: - CreateGifView
+    private func createGifView(url: String?) {
+        let x = CGFloat.random(in: 0...(parentView.frame.width - 80))
+        let y = CGFloat.random(in: 0...(parentView.frame.height - 80))
+        let imageView = SDAnimatedImageView(frame: CGRect(x: x, y: y, width: 120, height: 120))
+        imageView.isUserInteractionEnabled = true
+        if let url = url {
+            imageView.sd_setImage(with: URL(string: url), completed: nil)
+        }
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(emojiDidMove))
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(emojiDidPinch))
+        let rotationGesture = UIRotationGestureRecognizer(target: self, action: #selector(emojiDidRotate))
+        panGesture.delegate = self
+        pinchGesture.delegate = self
+        rotationGesture.delegate = self
+        imageView.addGestureRecognizer(panGesture)
+        imageView.addGestureRecognizer(pinchGesture)
+        imageView.addGestureRecognizer(rotationGesture)
+        parentView.addSubview(imageView)
+        guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+        rightBarButtonItems[0].isEnabled = true
         rightBarButtonItems[1].isEnabled = true
     }
 }
@@ -202,6 +279,10 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.present(actionSheet, animated: true, completion: nil)
     }
 
+    @objc func addGiphy() {
+        present(giphy, animated: true, completion: nil)
+    }
+
     //MARK: - UndoEmoji
     @objc func undoEmoji() {
         for view in parentView.subviews {
@@ -210,25 +291,77 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
             if parentView.subviews.count == 1 { // parentView.subviews.count == 1 = givenImage
                 guard let rightBarButtonItems = navigationItem.rightBarButtonItems else { return }
+                rightBarButtonItems[0].isEnabled = false
                 rightBarButtonItems[1].isEnabled = false
             }
         }
     }
 
-    //MARK: - SavePhoto
-    @objc func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(saveEmojiAddedImage(), self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    @objc func fireTimer() {
+        scheduledTimerWithTimeInterval()
+    }
+
+    private func scheduledTimerWithTimeInterval(){
+        gifTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(saveEmojiAddedImage), userInfo: nil, repeats: true)
+    }
+    //MARK: - SaveEmojiAddedImage
+    //Final Image
+    @objc private func saveEmojiAddedImage() {
+        UIGraphicsBeginImageContextWithOptions(parentView.frame.size, true, 0.0)
+        parentView.drawHierarchy(in: parentView.bounds, afterScreenUpdates: true)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return }
+        UIGraphicsEndImageContext()
+        if isGIFAdded {
+            self.gifImages.append(image)
+            indicator.startAnimating()
+            view.isUserInteractionEnabled = false
+            print("Gif Images Count: \(gifImages.count)")
+            if gifImages.count == 25 {
+                self.stopTimer()
+                indicator.stopAnimating()
+                view.isUserInteractionEnabled = true
+            }
+        }
     }
 
 
-    //MARK: - SaveEmojiAddedImage
-    //Final Image
-    private func saveEmojiAddedImage() -> UIImage {
-        UIGraphicsBeginImageContext(parentView.frame.size)
-        parentView.layer.render(in: UIGraphicsGetCurrentContext()!)
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return UIImage(named: "smile")! }
-        UIGraphicsEndImageContext()
-        return image
+    func stopTimer() {
+        if gifTimer != nil {
+            gifTimer!.invalidate()
+            gifTimer = nil
+            DispatchQueue.global(qos: .background).async {
+                DispatchQueue.main.async {
+                    self.createVideo()
+                }
+            }
+        }
+    }
+
+    func createVideo()  {
+        let settings = CXEImagesToVideo.videoSettings(codec: AVVideoCodecType.h264.rawValue, width: (gifImages[0].cgImage?.width)!, height: (gifImages[0].cgImage?.height)!)
+        let movieMaker = CXEImagesToVideo(videoSettings: settings)
+        movieMaker.createMovieFrom(images: gifImages){ (fileURL:URL) in
+            if self.isSaveVideo {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+                }) { saved, error in
+                    self.gifImages.removeAll()
+                    if saved {
+                        self.gifImages.removeAll()
+                        DispatchQueue.main.async {
+                            self.presentAlert(withTitle: "Successful", message: "GIF saved successfully")
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            self.presentAlert(withTitle: "Error", message: "")
+                        }
+                    }
+                }
+            } else {
+                self.gifImages.removeAll()
+                self.videoFileURL = fileURL
+            }
+        }
     }
 
     //MARK: - Image Picker
@@ -242,15 +375,6 @@ extension MainViewController: UIImagePickerControllerDelegate, UINavigationContr
             imagePicker.sourceType = .photoLibrary
         }
         present(imagePicker, animated: true, completion: nil)
-    }
-
-    //MARK: - DidFinishSavingWithError
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            presentAlert(withTitle: ImageAlertTitle.imageSavingErrorTitle.rawValue, message: error.localizedDescription)
-        } else {
-            presentAlert(withTitle:  ImageAlertTitle.imageSavingSuccessTitle.rawValue, message: ImageAlertTitle.imageSavingSuccessMessage.rawValue)
-        }
     }
 
     //MARK: - DidFinishPickingMediaWithInfo
@@ -286,7 +410,7 @@ extension MainViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.cell.rawValue, for: indexPath) as! MainCollectionViewCell
         let emoji = emojis[indexPath.row]
@@ -307,7 +431,18 @@ extension MainViewController: MainViewModelDelegate {
 
 extension MainViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        print("Simultaneous gesture recognizer!")
         return gestureRecognizer is UIRotationGestureRecognizer || gestureRecognizer is UIPinchGestureRecognizer
+    }
+}
+
+extension MainViewController: GiphyDelegate {
+    func didDismiss(controller: GiphyViewController?) {
+
+    }
+
+    func didSelectMedia(giphyViewController: GiphyViewController, media: GPHMedia) {
+        let url = media.url(rendition: .fixedWidth, fileType: .gif)
+        createGifView(url: url)
+        isGIFAdded = true
     }
 }

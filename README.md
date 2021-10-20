@@ -3,20 +3,20 @@
 Purpose of the project
 ======================
 
-Add emoji and graffiti letters to your photos. 😀🥰😎🦄🎨
+Add emoji, giphy and graffiti letters to your photos. Save gif added image to your photo library😀🥰😎🦄�
 
 
 Screen
 ======================
 <p float="left">
-  <img src="ScreenImages/ss.png" width="1200" height= "900"/>&nbsp; 
+  <img src="zappy.gif" width="400" height= "700"/>&nbsp; 
   </br> 
 </p>
 
 ## Tech-stack :calling:
 
-
-* [MVVM](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm)
+<!-- * [MVVM](https://www.raywenderlich.com/34-design-patterns-by-tutorials-mvvm) -->
+* [Giphy](https://github.com/Giphy/giphy-ios-sdk/blob/master/Docs.md)
 
 * [Swift 5](https://github.com/apple/swift)
 

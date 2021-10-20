@@ -13,7 +13,7 @@ class MainViewModel {
     weak var delegate: MainViewModelDelegate?
     var emojis = [
         Emoji(image: UIImage(named: "A")!, name: "A"),
-        Emoji(image: UIImage(named: "grinning")!, name: "grinning"),
+        Emoji(image: UIImage(named: "Grinning")!, name: "Grinning"),
         Emoji(image: UIImage(named: "B")!, name: "B"),
         Emoji(image: UIImage(named: "happy")!, name: "happy"),
         Emoji(image: UIImage(named: "C")!, name: "C"),

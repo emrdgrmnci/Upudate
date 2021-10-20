@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001C0AEB76E6D6986C904F8F /* Pods_ZappyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E692DA63F3B97F93E5F3063 /* Pods_ZappyUITests.framework */; };
+		0B89A6C0F96B3482DE9B9999 /* Pods_Zappy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21616EE33F279CD2A6FDA5D4 /* Pods_Zappy.framework */; };
+		4712683D25DD501B00E7F30F /* CircularProgreeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4712683C25DD501B00E7F30F /* CircularProgreeBar.swift */; };
 		47267C872502949F007B3E71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C862502949F007B3E71 /* AppDelegate.swift */; };
 		47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267C882502949F007B3E71 /* SceneDelegate.swift */; };
 		47267C90250294A5007B3E71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47267C8F250294A5007B3E71 /* Assets.xcassets */; };
@@ -15,15 +18,18 @@
 		47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAC250298C2007B3E71 /* MainViewController.swift */; };
 		47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */; };
 		475FC5EF25040EE80068B452 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */; };
+		476B554A25B09B18007760C8 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476B554925B09B18007760C8 /* APIKey.swift */; };
 		478C7F9B2504E9EF0074BC26 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478C7F9A2504E9EF0074BC26 /* Constants.swift */; };
 		478C7FA32504EDEA0074BC26 /* ZappyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478C7FA22504EDEA0074BC26 /* ZappyUITests.swift */; };
 		478EBDCE2502B81200382DED /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; };
-		478EBDCF2502B81200382DED /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 478EBDCC2502B5ED00382DED /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		478EBDD12502E14800382DED /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD02502E14800382DED /* Emoji.swift */; };
 		478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478EBDD42502E24100382DED /* MainCollectionViewCell.swift */; };
 		479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597A2503B3C8008104D5 /* MainContracts.swift */; };
 		479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479A597C2503B4D8008104D5 /* MainViewModel.swift */; };
+		47AE5FB525B1C5D5005E13F8 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */; };
+		47B8234525CBECED00A8F295 /* CXEImagesToVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47B8234425CBECED00A8F295 /* CXEImagesToVideo.swift */; };
 		47DB3C6725052CBE000217D5 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 47DB3C6625052CBD000217D5 /* README.md */; };
+		EF2CEEB5123985A06888BE66 /* Pods_ZappyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B78E5C65B17C74FB3B8AF91 /* Pods_ZappyTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +56,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				478EBDCF2502B81200382DED /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -58,6 +63,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0158CB6C85AF9C2F89B984ED /* Pods-ZappyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappyTests.release.xcconfig"; path = "Target Support Files/Pods-ZappyTests/Pods-ZappyTests.release.xcconfig"; sourceTree = "<group>"; };
+		166E834BCA01C5721079D204 /* Pods-ZappyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappyUITests.release.xcconfig"; path = "Target Support Files/Pods-ZappyUITests/Pods-ZappyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		1B78E5C65B17C74FB3B8AF91 /* Pods_ZappyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZappyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E692DA63F3B97F93E5F3063 /* Pods_ZappyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZappyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		21616EE33F279CD2A6FDA5D4 /* Pods_Zappy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Zappy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4712683C25DD501B00E7F30F /* CircularProgreeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProgreeBar.swift; sourceTree = "<group>"; };
 		47267C832502949F007B3E71 /* Zappy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Zappy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		47267C862502949F007B3E71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47267C882502949F007B3E71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +81,7 @@
 		47267CAC250298C2007B3E71 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		47267CAF2502A843007B3E71 /* MainViewControllerBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerBuilder.swift; sourceTree = "<group>"; };
 		475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		476B554925B09B18007760C8 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		478C7F9A2504E9EF0074BC26 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		478C7FA02504EDEA0074BC26 /* ZappyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZappyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		478C7FA22504EDEA0074BC26 /* ZappyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappyUITests.swift; sourceTree = "<group>"; };
@@ -79,7 +91,13 @@
 		478EBDD42502E24100382DED /* MainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewCell.swift; sourceTree = "<group>"; };
 		479A597A2503B3C8008104D5 /* MainContracts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContracts.swift; sourceTree = "<group>"; };
 		479A597C2503B4D8008104D5 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		47B8234425CBECED00A8F295 /* CXEImagesToVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXEImagesToVideo.swift; sourceTree = "<group>"; };
 		47DB3C6625052CBD000217D5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		62B4126DD4DB55BC6DEBA8F3 /* Pods-Zappy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zappy.debug.xcconfig"; path = "Target Support Files/Pods-Zappy/Pods-Zappy.debug.xcconfig"; sourceTree = "<group>"; };
+		630B9309733F2DB82B1006D1 /* Pods-ZappyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappyTests.debug.xcconfig"; path = "Target Support Files/Pods-ZappyTests/Pods-ZappyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8FA7606480AAA82F1D09A75D /* Pods-Zappy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Zappy.release.xcconfig"; path = "Target Support Files/Pods-Zappy/Pods-Zappy.release.xcconfig"; sourceTree = "<group>"; };
+		B915FFAA037836FD5B804CE7 /* Pods-ZappyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZappyUITests.debug.xcconfig"; path = "Target Support Files/Pods-ZappyUITests/Pods-ZappyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +106,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				478EBDCE2502B81200382DED /* SnapKit.framework in Frameworks */,
+				0B89A6C0F96B3482DE9B9999 /* Pods_Zappy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF2CEEB5123985A06888BE66 /* Pods_ZappyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +122,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				001C0AEB76E6D6986C904F8F /* Pods_ZappyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,6 +138,7 @@
 				478C7FA12504EDEA0074BC26 /* ZappyUITests */,
 				47267C842502949F007B3E71 /* Products */,
 				478EBDCB2502B5ED00382DED /* Frameworks */,
+				C44F5946B0E2322E574350CC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				475FC5EE25040EE80068B452 /* UIViewController+Extensions.swift */,
+				47AE5FB425B1C5D5005E13F8 /* UIViewController+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -202,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				478C7F9A2504E9EF0074BC26 /* Constants.swift */,
+				476B554925B09B18007760C8 /* APIKey.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -219,6 +243,9 @@
 			isa = PBXGroup;
 			children = (
 				478EBDCC2502B5ED00382DED /* SnapKit.framework */,
+				21616EE33F279CD2A6FDA5D4 /* Pods_Zappy.framework */,
+				1B78E5C65B17C74FB3B8AF91 /* Pods_ZappyTests.framework */,
+				1E692DA63F3B97F93E5F3063 /* Pods_ZappyUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -227,6 +254,7 @@
 			isa = PBXGroup;
 			children = (
 				478EBDD32502E23100382DED /* MainCollectionViewCell */,
+				4712683C25DD501B00E7F30F /* CircularProgreeBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -244,8 +272,22 @@
 			children = (
 				478C7F992504E5D60074BC26 /* Constants */,
 				478C7F982504E5C90074BC26 /* Extensions */,
+				47B8234425CBECED00A8F295 /* CXEImagesToVideo.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		C44F5946B0E2322E574350CC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				62B4126DD4DB55BC6DEBA8F3 /* Pods-Zappy.debug.xcconfig */,
+				8FA7606480AAA82F1D09A75D /* Pods-Zappy.release.xcconfig */,
+				630B9309733F2DB82B1006D1 /* Pods-ZappyTests.debug.xcconfig */,
+				0158CB6C85AF9C2F89B984ED /* Pods-ZappyTests.release.xcconfig */,
+				B915FFAA037836FD5B804CE7 /* Pods-ZappyUITests.debug.xcconfig */,
+				166E834BCA01C5721079D204 /* Pods-ZappyUITests.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,11 +297,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47267CA2250294A5007B3E71 /* Build configuration list for PBXNativeTarget "Zappy" */;
 			buildPhases = (
+				B0F0D1A25560FE4927E4177C /* [CP] Check Pods Manifest.lock */,
 				47267C7F2502949F007B3E71 /* Sources */,
 				47267C802502949F007B3E71 /* Frameworks */,
 				47267C812502949F007B3E71 /* Resources */,
 				473163DD2502B25C00A86E19 /* Embed Frameworks */,
 				478EBDCA2502B57B00382DED /* ShellScript */,
+				3862B7E5513901D4C95C3B55 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -274,6 +318,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47267CA5250294A5007B3E71 /* Build configuration list for PBXNativeTarget "ZappyTests" */;
 			buildPhases = (
+				91FB8E884E5E9A595D2097B4 /* [CP] Check Pods Manifest.lock */,
 				47267C95250294A5007B3E71 /* Sources */,
 				47267C96250294A5007B3E71 /* Frameworks */,
 				47267C97250294A5007B3E71 /* Resources */,
@@ -292,6 +337,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 478C7FA72504EDEA0074BC26 /* Build configuration list for PBXNativeTarget "ZappyUITests" */;
 			buildPhases = (
+				3362A9C8CD5A3592DA753DA5 /* [CP] Check Pods Manifest.lock */,
 				478C7F9C2504EDEA0074BC26 /* Sources */,
 				478C7F9D2504EDEA0074BC26 /* Frameworks */,
 				478C7F9E2504EDEA0074BC26 /* Resources */,
@@ -377,6 +423,45 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3362A9C8CD5A3592DA753DA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZappyUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3862B7E5513901D4C95C3B55 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zappy/Pods-Zappy-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Zappy/Pods-Zappy-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Zappy/Pods-Zappy-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		478EBDCA2502B57B00382DED /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
@@ -395,6 +480,50 @@
 			shellScript = "
 ";
 		};
+		91FB8E884E5E9A595D2097B4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZappyTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0F0D1A25560FE4927E4177C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Zappy-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -404,14 +533,18 @@
 			files = (
 				478EBDD12502E14800382DED /* Emoji.swift in Sources */,
 				478EBDD52502E24100382DED /* MainCollectionViewCell.swift in Sources */,
+				47AE5FB525B1C5D5005E13F8 /* UIViewController+.swift in Sources */,
 				475FC5EF25040EE80068B452 /* UIViewController+Extensions.swift in Sources */,
 				47267CAD250298C2007B3E71 /* MainViewController.swift in Sources */,
 				47267CB02502A843007B3E71 /* MainViewControllerBuilder.swift in Sources */,
 				478C7F9B2504E9EF0074BC26 /* Constants.swift in Sources */,
+				476B554A25B09B18007760C8 /* APIKey.swift in Sources */,
 				479A597B2503B3C8008104D5 /* MainContracts.swift in Sources */,
 				47267C872502949F007B3E71 /* AppDelegate.swift in Sources */,
 				47267C892502949F007B3E71 /* SceneDelegate.swift in Sources */,
 				479A597D2503B4D8008104D5 /* MainViewModel.swift in Sources */,
+				47B8234525CBECED00A8F295 /* CXEImagesToVideo.swift in Sources */,
+				4712683D25DD501B00E7F30F /* CircularProgreeBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,10 +707,11 @@
 		};
 		47267CA3250294A5007B3E71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 62B4126DD4DB55BC6DEBA8F3 /* Pods-Zappy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 554X8TL4T7;
+				DEVELOPMENT_TEAM = NMCVZ8F7S5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -588,7 +722,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zappy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -597,10 +731,11 @@
 		};
 		47267CA4250294A5007B3E71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8FA7606480AAA82F1D09A75D /* Pods-Zappy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 554X8TL4T7;
+				DEVELOPMENT_TEAM = NMCVZ8F7S5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -611,7 +746,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zappy;
+				PRODUCT_BUNDLE_IDENTIFIER = com.pairs.Zapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -620,6 +755,7 @@
 		};
 		47267CA6250294A5007B3E71 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 630B9309733F2DB82B1006D1 /* Pods-ZappyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -642,6 +778,7 @@
 		};
 		47267CA7250294A5007B3E71 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0158CB6C85AF9C2F89B984ED /* Pods-ZappyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -664,6 +801,7 @@
 		};
 		478C7FA82504EDEA0074BC26 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B915FFAA037836FD5B804CE7 /* Pods-ZappyUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 554X8TL4T7;
@@ -683,6 +821,7 @@
 		};
 		478C7FA92504EDEA0074BC26 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 166E834BCA01C5721079D204 /* Pods-ZappyUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 554X8TL4T7;
